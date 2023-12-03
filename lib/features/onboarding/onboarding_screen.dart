@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mobile_app/core/helpers/extensions.dart';
+import 'package:mobile_app/core/routing/routes.dart';
 import 'package:mobile_app/core/theming/styles.dart';
-import 'package:mobile_app/features/onboarding/widgets/get_started_button.dart';
+import 'package:mobile_app/core/widgets/green_button.dart';
 import 'package:mobile_app/features/onboarding/widgets/onboarding_banner.dart';
 
 class OnboardingScreen extends StatelessWidget {
@@ -25,7 +27,10 @@ class OnboardingScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 30.h),
-              const GetStartedButton(),
+              const GreenButton(
+                text: 'Get Started',
+                route: Routes.getStartedScreen,
+              ),
             ],
           ),
         ),

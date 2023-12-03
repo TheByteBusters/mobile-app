@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app/core/routing/routes.dart';
+import 'package:mobile_app/features/get_started/get_started_screen.dart';
 import 'package:mobile_app/features/login/ui/login_screen.dart';
 import 'package:mobile_app/features/onboarding/onboarding_screen.dart';
 
@@ -16,6 +17,10 @@ class AppRouter {
       case Routes.loginScreen:
         return MaterialPageRoute(
           builder: (_) => const LoginScreen(),
+        );
+      case Routes.getStartedScreen:
+        return MaterialPageRoute(
+          builder: (_) => const GetStartedScreen(),
         );
       default:
         return MaterialPageRoute(
