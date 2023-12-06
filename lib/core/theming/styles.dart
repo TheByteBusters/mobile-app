@@ -11,7 +11,7 @@ class TextStyles {
   );
 
   static TextStyle h1BlackBold = TextStyle(
-    fontSize: 30.spMax,
+    fontSize: 30.sp,
     fontFamily: 'Inter',
     fontWeight: FontWeight.w700,
     color: Colors.black,
@@ -20,7 +20,7 @@ class TextStyles {
   static TextStyle smallFadded = TextStyle(
     fontSize: 14.sp,
     fontFamily: 'Inter',
-    color: ColorsManager.mainGreen,
+    color: ColorsManager.fadded,
   );
 
   static TextStyle bigTileTitle = TextStyle(

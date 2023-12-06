@@ -20,16 +20,17 @@ class GreenButton extends StatelessWidget {
         context.pushNamed(route);
       },
       style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(ColorsManager.mainGreen),
-          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          minimumSize: MaterialStateProperty.all(
-            const Size(200, 50),
+        backgroundColor: MaterialStateProperty.all(ColorsManager.mainGreen),
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        minimumSize: MaterialStateProperty.all(
+          const Size(200, 50),
+        ),
+        shape: MaterialStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(18),
           ),
-          shape: MaterialStateProperty.all(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(18),
-            ),
-          )),
+        ),
+      ),
       child: Text(
         text,
         style: TextStyles.h4WhiteSemiBold,
