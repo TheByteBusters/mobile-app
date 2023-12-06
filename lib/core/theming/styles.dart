@@ -16,4 +16,16 @@ class TextStyles {
     fontWeight: FontWeight.w700,
     color: Colors.black,
   );
+
+  static TextStyle smallFadded = TextStyle(
+    fontSize: 14.sp,
+    fontFamily: 'Inter',
+    color: ColorsManager.fadded,
+  );
+
+  static TextStyle bigTileTitle = TextStyle(
+    fontSize: 18.sp,
+    fontFamily: 'Inter',
+    color: Colors.black,
+  );
 }
