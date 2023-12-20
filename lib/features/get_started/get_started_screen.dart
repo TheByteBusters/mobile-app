@@ -24,7 +24,10 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
         child: Center(
           child: Column(
             children: [
-              const Heading(),
+              const Heading(
+                title: 'Let\'s get started',
+                subtitle: 'Who are you?',
+              ),
               SizedBox(height: 100.h),
               RoleTile(
                 icon: Icons.person_outline_outlined,

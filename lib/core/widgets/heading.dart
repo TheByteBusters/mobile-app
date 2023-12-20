@@ -4,8 +4,13 @@ import 'package:flutter_svg/svg.dart';
 import 'package:mobile_app/core/theming/styles.dart';
 
 class Heading extends StatelessWidget {
+  final String title;
+  final String subtitle;
+
   const Heading({
     super.key,
+    required this.title,
+    required this.subtitle,
   });
 
   @override
@@ -22,11 +27,11 @@ class Heading extends StatelessWidget {
         ),
         SizedBox(height: 40.h),
         Text(
-          'Let\'s get started',
+          title,
           style: TextStyles.h1BlackBold,
         ),
         Text(
-          'Who are you?',
+          subtitle,
           style: TextStyles.smallFadded,
         ),
       ],
