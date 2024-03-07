@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app/core/routing/routes.dart';
-import 'package:mobile_app/features/get_started/get_started_screen.dart';
-import 'package:mobile_app/features/login/ui/login_screen.dart';
+import 'package:mobile_app/features/auth/ui/get_started/get_started_screen.dart';
+import 'package:mobile_app/features/auth/ui/login/login_screen.dart';
+import 'package:mobile_app/features/auth/ui/signup/signup_screen.dart';
 import 'package:mobile_app/features/onboarding/onboarding_screen.dart';
 
 class AppRouter {
@@ -21,6 +22,10 @@ class AppRouter {
       case Routes.getStartedScreen:
         return MaterialPageRoute(
           builder: (_) => const GetStartedScreen(),
+        );
+      case Routes.signUpScreen:
+        return MaterialPageRoute(
+          builder: (_) => const SignUpScreen(),
         );
       default:
         return MaterialPageRoute(

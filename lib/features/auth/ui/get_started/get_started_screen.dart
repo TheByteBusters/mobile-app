@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile_app/core/routing/routes.dart';
 import 'package:mobile_app/core/widgets/green_button.dart';
 import 'package:mobile_app/core/widgets/heading.dart';
-import 'package:mobile_app/features/get_started/role_tile.dart';
+import 'package:mobile_app/features/auth/ui/get_started/role_tile.dart';
 
 class GetStartedScreen extends StatefulWidget {
   const GetStartedScreen({super.key});

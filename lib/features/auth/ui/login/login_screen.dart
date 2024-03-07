@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile_app/core/helpers/extensions.dart';
 import 'package:mobile_app/core/helpers/spacing.dart';
+import 'package:mobile_app/core/routing/routes.dart';
 import 'package:mobile_app/core/theming/colors.dart';
 import 'package:mobile_app/core/theming/styles.dart';
 import 'package:mobile_app/core/widgets/app_text_form_field.dart';
@@ -22,8 +23,8 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: SafeArea(
+      body: SafeArea(
+        child: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 15.w),
             child: Column(
@@ -34,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       onPressed: () {
                         context.pop();
                       },
-                      icon: const Icon(Icons.arrow_back_ios_new_rounded),
+                      icon: const Icon(Icons.arrow_back),
                     ),
                     const Heading(
                       title: 'Login',
@@ -75,8 +76,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           },
                           child: Icon(
                             isObscureText
-                                ? Icons.visibility_off
-                                : Icons.visibility,
+                                ? Icons.visibility_off_outlined
+                                : Icons.visibility_outlined,
                           ),
                         ),
                       ),
@@ -98,7 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ],
                   ),
                 ),
-                verticalSpace(20),
+                verticalSpace(20.h),
                 Align(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -107,13 +108,18 @@ class _LoginScreenState extends State<LoginScreen> {
                         'Dont\'t have an account? ',
                         style: TextStyles.smallFadded,
                       ),
-                      Text(
-                        'Sign Up',
-                        style: TextStyles.smallFadded.copyWith(
-                          color: ColorsManager.mainGreen,
-                          decoration: TextDecoration.underline,
-                          decorationColor: ColorsManager.mainGreen,
+                      GestureDetector(
+                        child: Text(
+                          'Sign Up',
+                          style: TextStyles.smallFadded.copyWith(
+                            color: ColorsManager.mainGreen,
+                            decoration: TextDecoration.underline,
+                            decorationColor: ColorsManager.mainGreen,
+                          ),
                         ),
+                        onTap: () {
+                          context.pushNamed(Routes.signUpScreen);
+                        },
                       ),
                     ],
                   ),
