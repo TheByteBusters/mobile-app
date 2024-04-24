@@ -6,9 +6,9 @@ class AuthService {
     String password,
   ) async {
     try {
-      print('signUp user');
+      // print('signUp user');
     } catch (e) {
-      print(e);
+      // print(e);
     }
   }
 

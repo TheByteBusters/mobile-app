@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mobile_app/core/helpers/extensions.dart';
 import 'package:mobile_app/core/theming/styles.dart';
 
-class Heading extends StatelessWidget {
+class ScreenHeader extends StatelessWidget {
   final String title;
   final String subtitle;
+  final bool? withReturn;
 
-  const Heading({
+  const ScreenHeader({
     super.key,
     required this.title,
     required this.subtitle,
+    this.withReturn,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    Widget content = Column(
       children: [
         SizedBox(height: 20.h),
         SizedBox(
@@ -36,5 +39,21 @@ class Heading extends StatelessWidget {
         ),
       ],
     );
+
+    if (withReturn ?? false) {
+      content = Stack(
+        children: [
+          IconButton(
+            onPressed: () {
+              context.pop();
+            },
+            icon: const Icon(Icons.arrow_back),
+          ),
+          content,
+        ],
+      );
+    }
+
+    return content;
   }
 }

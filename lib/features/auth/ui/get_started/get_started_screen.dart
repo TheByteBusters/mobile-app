@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile_app/core/routing/routes.dart';
 import 'package:mobile_app/core/widgets/green_button.dart';
-import 'package:mobile_app/core/widgets/heading.dart';
+import 'package:mobile_app/core/widgets/screen_header.dart';
 import 'package:mobile_app/features/auth/ui/get_started/role_tile.dart';
 
 class GetStartedScreen extends StatefulWidget {
@@ -24,7 +24,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
         child: Center(
           child: Column(
             children: [
-              const Heading(
+              const ScreenHeader(
                 title: 'Let\'s get started',
                 subtitle: 'Who are you?',
               ),
@@ -55,7 +55,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
               Expanded(child: Container()),
               const GreenButton(
                 text: 'Continue',
-                route: Routes.loginScreen,
+                route: Routes.authScreen,
               ),
               SizedBox(height: 40.h),
             ],
