@@ -8,12 +8,14 @@ class ScreenHeader extends StatelessWidget {
   final String title;
   final String subtitle;
   final bool? withReturn;
+  final bool? withLogo;
 
   const ScreenHeader({
     super.key,
     required this.title,
     required this.subtitle,
     this.withReturn,
+    this.withLogo,
   });
 
   @override
@@ -21,13 +23,15 @@ class ScreenHeader extends StatelessWidget {
     Widget content = Column(
       children: [
         SizedBox(height: 20.h),
-        SizedBox(
-          width: double.infinity,
-          child: SvgPicture.asset(
-            'assets/svgs/black_green_stork.svg',
-            width: 90.w,
-          ),
-        ),
+        withLogo == false
+            ? Container()
+            : SizedBox(
+                width: double.infinity,
+                child: SvgPicture.asset(
+                  'assets/svgs/black_green_stork.svg',
+                  width: 90.w,
+                ),
+              ),
         SizedBox(height: 40.h),
         Text(
           title,

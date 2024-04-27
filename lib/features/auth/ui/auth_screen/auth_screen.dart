@@ -71,7 +71,6 @@ class _AuthScreenState extends State<AuthScreen> {
                   ),
                 ),
                 verticalSpace(25.h),
-                
               ],
             ),
           ),

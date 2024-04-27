@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile_app/core/helpers/spacing.dart';
 import 'package:mobile_app/core/theming/styles.dart';
+import 'package:mobile_app/core/widgets/app_dropdown_menu.dart';
 import 'package:mobile_app/core/widgets/app_text_form_field.dart';
 import 'package:mobile_app/core/widgets/green_button.dart';
 
@@ -87,20 +88,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
           style: TextStyles.h4WhiteSemiBold.copyWith(color: Colors.black),
         ),
         verticalSpace(5.h),
-
         Container(
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(Radius.circular(8)),
             border: Border.all(
               color: Colors.black,
+              width: 1.2,
             ),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Padding(
-                padding: EdgeInsets.all(15.0),
-                child: Text(
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 15.w),
+                child: const Text(
                   'DD/MM.YYYY',
                   style: TextStyle(color: Colors.grey),
                 ),
@@ -112,16 +113,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ],
           ),
         ),
-        // verticalSpace(25.h),
-        // Text(
-        //   'Governorate',
-        //   style: TextStyles.h4WhiteSemiBold.copyWith(color: Colors.black),
-        // ),
-        // verticalSpace(5.h),
-        // DropdownButton(
-        //   items: const [DropdownMenuItem(child: Text('damietta'))],
-        //   onChanged: (item) {},
-        // ),
+        verticalSpace(25.h),
+        Text(
+          'Country',
+          style: TextStyles.h4WhiteSemiBold.copyWith(color: Colors.black),
+        ),
+        verticalSpace(5.h),
+        const AppDropdownMenu(items: {
+          'Damietta': 0,
+          'El-Mansoura': 1,
+          'Bort-Said': 2,
+        }),
         verticalSpace(25.h),
         Text(
           'Phone number',

@@ -27,12 +27,19 @@ class TextStyles {
   static TextStyle smallFadded = TextStyle(
     fontSize: 14.sp,
     fontFamily: 'Inter',
-    color: ColorsManager.fadded,
+    color: const Color(0x80011627),
   );
 
   static TextStyle bigTileTitle = TextStyle(
     fontSize: 18.sp,
     fontFamily: 'Inter',
+    color: Colors.black,
+  );
+
+  static TextStyle h2BlackNormal = TextStyle(
+    fontSize: 20.sp,
+    fontFamily: 'Inter',
+    fontWeight: FontWeight.w600,
     color: Colors.black,
   );
 }

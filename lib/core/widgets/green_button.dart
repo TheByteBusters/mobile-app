@@ -6,19 +6,22 @@ import 'package:mobile_app/core/theming/styles.dart';
 class GreenButton extends StatelessWidget {
   final String text;
   final String route;
+  final void Function()? onPressed;
 
   const GreenButton({
     super.key,
     required this.text,
     required this.route,
+    this.onPressed,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () {
-        context.pushNamed(route);
-      },
+      onPressed: onPressed ??
+          () {
+            context.pushNamed(route);
+          },
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all(ColorsManager.mainGreen),
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
