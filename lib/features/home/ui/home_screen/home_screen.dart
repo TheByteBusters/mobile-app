@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile_app/core/helpers/spacing.dart';
+import 'package:mobile_app/core/routing/routes.dart';
 import 'package:mobile_app/core/theming/colors.dart';
 import 'package:mobile_app/core/widgets/screen_header.dart';
 import 'package:mobile_app/features/home/ui/home_screen/navigation_button.dart';
@@ -52,7 +53,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   horizontalSpace(20.w),
                   const NavigationButton(
-                    route: '/home/searchRequestScreen',
+                    route: Routes.monitoringScreen,
                     icon: Icons.monitor_heart_outlined,
                   ),
                   horizontalSpace(20.w),

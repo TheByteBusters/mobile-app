@@ -5,4 +5,5 @@ class Routes {
   static const String homeScreen = '/home';
   static const String searchRequestScreen = '$homeScreen/searchRequestScreen';
   static const String searchingScreen = '$searchRequestScreen/serachScreen';
+  static const String monitoringScreen = '$searchRequestScreen/monitoringScreen';
 }

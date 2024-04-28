@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile_app/core/routing/routes.dart';
 import 'package:mobile_app/features/auth/ui/auth_screen/auth_screen.dart';
 import 'package:mobile_app/features/auth/ui/get_started/get_started_screen.dart';
+import 'package:mobile_app/features/monitoring/ui/monitoring_screen.dart';
 import 'package:mobile_app/features/onboarding/onboarding_screen.dart';
 import 'package:mobile_app/features/home/ui/home_screen/home_screen.dart';
 import 'package:mobile_app/features/search/ui/search_request_screen.dart';
@@ -36,6 +37,10 @@ class AppRouter {
       case Routes.searchingScreen:
         return MaterialPageRoute(
           builder: (_) => const SearchScreen(),
+        );
+      case Routes.monitoringScreen:
+        return MaterialPageRoute(
+          builder: (_) => const MonitoringScreen(),
         );
       default:
         return MaterialPageRoute(
