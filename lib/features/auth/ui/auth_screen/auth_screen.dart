@@ -15,7 +15,6 @@ class AuthScreen extends StatefulWidget {
 }
 
 class _AuthScreenState extends State<AuthScreen> {
-  final formKey = GlobalKey<FormState>();
   bool isObscureText = true;
   bool haveAccount = true;
 

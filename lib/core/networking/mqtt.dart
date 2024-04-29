@@ -5,7 +5,7 @@ import 'package:mqtt_client/mqtt_server_client.dart';
 final client = MqttServerClient("broker.hivemq.com", '8883');
 
 class MqttNetwork {
-  static void connect() async {
+  static Future<void> connect() async {
     client.logging(on: true);
     client.onDisconnected = _onDisconnected;
     client.onConnected = _onConnected;
@@ -39,6 +39,22 @@ class MqttNetwork {
       client.disconnect();
       throw Exception('client connection failed ${client.connectionStatus}');
     }
+    // subscribeToTopic('heartRateTopic');
+  }
+
+  static void subscribeToTopic(String topicName) {
+    print('Subscribing to the $topicName topic');
+    client.subscribe(topicName, MqttQos.atMostOnce);
+
+    // print the message when it is received
+    client.updates!.listen((List<MqttReceivedMessage<MqttMessage>> c) {
+      final MqttPublishMessage recMess = c[0].payload as MqttPublishMessage;
+      var message =
+          MqttPublishPayload.bytesToStringAsString(recMess.payload.message);
+
+      print('YOU GOT A NEW MESSAGE:');
+      print(message);
+    });
   }
 
   static void _onDisconnected() {

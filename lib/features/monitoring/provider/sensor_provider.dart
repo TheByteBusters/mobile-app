@@ -7,9 +7,12 @@ class SensorNotifier extends StateNotifier<String> {
   var connected = false;
 
   void connectProker() async {
-    MqttNetwork.connect();
-    subscribeToTopic('heartRateTopic');
-    connected = true;
+    if (connected == false) {
+      await MqttNetwork.connect();
+      print('done');
+      connected = true;
+      subscribeToTopic('heartRateTopic');
+    }
   }
 
   void subscribeToTopic(String topicName) {
@@ -23,7 +26,8 @@ class SensorNotifier extends StateNotifier<String> {
           MqttPublishPayload.bytesToStringAsString(recMess.payload.message);
 
       print('YOU GOT A NEW MESSAGE:');
-      state = message;
+      print(message);
+      state = message.substring(0, message.length - 1);
     });
   }
 }

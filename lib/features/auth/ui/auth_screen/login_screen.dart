@@ -1,24 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile_app/core/helpers/spacing.dart';
 import 'package:mobile_app/core/theming/colors.dart';
 import 'package:mobile_app/core/theming/styles.dart';
 import 'package:mobile_app/core/widgets/app_text_form_field.dart';
 import 'package:mobile_app/core/widgets/green_button.dart';
+import 'package:mobile_app/features/auth/provider/auth_provider.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends ConsumerState<LoginScreen> {
   final formKey = GlobalKey<FormState>();
   bool isObscureText = true;
 
   @override
   Widget build(BuildContext context) {
+    final authentication = ref.watch(authProvider.notifier);
+
     return Form(
       key: formKey,
       child: Column(
@@ -29,8 +33,9 @@ class _LoginScreenState extends State<LoginScreen> {
             style: TextStyles.h4WhiteSemiBold.copyWith(color: Colors.black),
           ),
           verticalSpace(5.h),
-          const AppTextFormField(
+          AppTextFormField(
             hintText: 'email@gmail.com',
+            validation: authentication.validateFullName,
           ),
           verticalSpace(25.h),
           Text(
@@ -53,6 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     : Icons.visibility_outlined,
               ),
             ),
+            validation: authentication.validateFullName,
           ),
           verticalSpace(10.h),
           Align(

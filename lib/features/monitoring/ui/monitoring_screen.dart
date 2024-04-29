@@ -7,11 +7,16 @@ import 'package:mobile_app/core/widgets/screen_header.dart';
 import 'package:mobile_app/features/monitoring/provider/sensor_provider.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
-class MonitoringScreen extends ConsumerWidget {
+class MonitoringScreen extends ConsumerStatefulWidget {
   const MonitoringScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<MonitoringScreen> createState() => _MonitoringScreenState();
+}
+
+class _MonitoringScreenState extends ConsumerState<MonitoringScreen> {
+  @override
+  Widget build(BuildContext context) {
     ref.watch(sensorProvider.notifier).connectProker();
     String reading = ref.watch(sensorProvider);
 
