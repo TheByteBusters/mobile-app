@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mobile_app/features/auth/provider/auth_provider.dart';
 
-class AppDropdownMenu extends StatelessWidget {
+class AppDropdownMenu extends ConsumerStatefulWidget {
   const AppDropdownMenu({
     super.key,
     required this.items,
@@ -10,7 +12,16 @@ class AppDropdownMenu extends StatelessWidget {
   final Map<String, int> items;
 
   @override
+  ConsumerState<AppDropdownMenu> createState() => _AppDropdownMenuState();
+}
+
+class _AppDropdownMenuState extends ConsumerState<AppDropdownMenu> {
+  var currentValue = 0;
+
+  @override
   Widget build(BuildContext context) {
+    final authentication = ref.watch(authProvider.notifier);
+
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 1.h),
       decoration: BoxDecoration(
@@ -21,11 +32,15 @@ class AppDropdownMenu extends StatelessWidget {
         ),
       ),
       child: DropdownButtonHideUnderline(
-        child: DropdownButton(
-          value: 0,
+        child: DropdownButtonFormField(
+          value: currentValue,
           isExpanded: true,
-          onChanged: (value) {},
-          items: items.entries
+          onChanged: (value) {
+            setState(() {
+              currentValue = value ?? 0;
+            });
+          },
+          items: widget.items.entries
               .map(
                 (item) => DropdownMenuItem(
                   value: item.value,
@@ -33,6 +48,10 @@ class AppDropdownMenu extends StatelessWidget {
                 ),
               )
               .toList(),
+          onSaved: (value) {
+            authentication.country = widget.items.keys.toList()[value!];
+          },
+          decoration: const InputDecoration(border: InputBorder.none),
         ),
       ),
     );

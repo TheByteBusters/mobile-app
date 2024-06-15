@@ -5,7 +5,7 @@ import 'package:mobile_app/core/theming/colors.dart';
 import 'package:mobile_app/core/theming/styles.dart';
 import 'package:mobile_app/core/widgets/screen_header.dart';
 import 'package:mobile_app/features/auth/ui/auth_screen/login_screen.dart';
-import 'package:mobile_app/features/auth/ui/auth_screen/signup_screen.dart';
+import 'package:mobile_app/features/auth/ui/auth_screen/signup_screen/signup_screen.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});

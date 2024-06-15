@@ -11,8 +11,10 @@ class AppTextFormField extends StatelessWidget {
   final TextStyle? hintStyle;
   final bool? isObscureText;
   final Widget? suffixIcon;
-  final String hintText;
+  final Widget? prefix;
   final String? Function(String?) validation;
+  final void Function(String?) submition;
+  final String hintText;
 
   const AppTextFormField({
     super.key,
@@ -23,8 +25,10 @@ class AppTextFormField extends StatelessWidget {
     this.hintStyle,
     this.isObscureText,
     this.suffixIcon,
+    this.prefix,
     required this.hintText,
     required this.validation,
+    required this.submition,
   });
 
   @override
@@ -32,6 +36,7 @@ class AppTextFormField extends StatelessWidget {
     return TextFormField(
       decoration: InputDecoration(
         isDense: true,
+        prefixIconConstraints: const BoxConstraints(minWidth: 0, minHeight: 0),
         contentPadding: contentPadding ??
             EdgeInsets.symmetric(
               horizontal: 17.w,
@@ -73,12 +78,14 @@ class AppTextFormField extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
         ),
         hintText: hintText,
+        prefixIcon: prefix,
         suffixIcon: suffixIcon,
         filled: false,
         fillColor: ColorsManager.offwhite,
       ),
       obscureText: isObscureText ?? false,
       validator: validation,
+      onSaved: submition,
       style: TextStyles.h4BlackNormal,
     );
   }

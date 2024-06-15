@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mobile_app/core/helpers/extensions.dart';
 import 'package:mobile_app/core/helpers/spacing.dart';
+import 'package:mobile_app/core/routing/routes.dart';
 import 'package:mobile_app/core/theming/colors.dart';
 import 'package:mobile_app/core/theming/styles.dart';
 import 'package:mobile_app/core/widgets/app_text_form_field.dart';
 import 'package:mobile_app/core/widgets/green_button.dart';
 import 'package:mobile_app/features/auth/provider/auth_provider.dart';
+import 'package:mobile_app/features/auth/services/auth_service.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
@@ -16,7 +19,7 @@ class LoginScreen extends ConsumerStatefulWidget {
 }
 
 class _LoginScreenState extends ConsumerState<LoginScreen> {
-  final formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
   bool isObscureText = true;
 
   @override
@@ -24,7 +27,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     final authentication = ref.watch(authProvider.notifier);
 
     return Form(
-      key: formKey,
+      key: _formKey,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -35,7 +38,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           verticalSpace(5.h),
           AppTextFormField(
             hintText: 'email@gmail.com',
-            validation: authentication.validateFullName,
+            validation: AuthService.validateEmail,
+            submition: (value) {
+              authentication.email = value!;
+            },
           ),
           verticalSpace(25.h),
           Text(
@@ -45,6 +51,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           verticalSpace(5.h),
           AppTextFormField(
             hintText: '********',
+            validation: AuthService.validatePassword,
+            submition: (value) {
+              authentication.password = value!;
+            },
             isObscureText: isObscureText,
             suffixIcon: GestureDetector(
               onTap: () {
@@ -58,7 +68,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     : Icons.visibility_outlined,
               ),
             ),
-            validation: authentication.validateFullName,
           ),
           verticalSpace(10.h),
           Align(
@@ -71,9 +80,20 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             ),
           ),
           verticalSpace(220),
-          const Align(
+          Align(
             alignment: AlignmentDirectional.center,
-            child: GreenButton(text: 'Login', route: '/home'),
+            child: GreenButton(
+              text: 'Login',
+              route: '/home',
+              onPressed: () {
+                // if (_formKey.currentState!.validate()) {
+                FocusManager.instance.primaryFocus?.unfocus();
+                context.pushNamed(Routes.homeScreen);
+                // print('pressed');
+                // HTTPAuth.loginUser();
+                // }
+              },
+            ),
           ),
         ],
       ),

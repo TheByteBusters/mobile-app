@@ -1,34 +1,32 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mobile_app/core/networking/mqtt.dart';
-import 'package:mqtt_client/mqtt_client.dart';
 
-class AuthNotifier extends StateNotifier<String> {
-  AuthNotifier() : super('init');
+enum AuthState {
+  init,
+  localValidation,
+  remoteValidation,
+  complete,
+}
+
+class AuthNotifier extends StateNotifier<AuthState> {
+  AuthNotifier() : super(AuthState.init);
   var email = '';
   var password = '';
-  var repeatedPassword = '';
   var fullName = '';
   var birthDate = '';
   var country = '';
   var phoneNumber = '';
 
-  String? validateFullName(String? value) {
-    if (value == '' || value == null) {
-      return 'must provide your full name';
-    }
-    print('$value is validated');
-
-    RegExp regExp = RegExp(r'[أ-ي a-zA-z]');
-    var match = regExp.allMatches(value);
-
-    if (match.length == value.length) {
-      return 'your full name must contain alphabetical letters only';
-    }
-
-    return null;
+  void pickDate() {}
+  void printAttributes() {
+    print(email);
+    print(password);
+    print(birthDate);
+    print(fullName);
+    print(country);
+    print(phoneNumber);
   }
 }
 
-final authProvider = StateNotifierProvider<AuthNotifier, String>(
+final authProvider = StateNotifierProvider<AuthNotifier, AuthState>(
   (ref) => AuthNotifier(),
 );

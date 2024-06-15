@@ -12,9 +12,9 @@ class MqttNetwork {
     client.pongCallback = _pong;
 
     final connMess = MqttConnectMessage()
-        .withClientIdentifier('tarek')
+        .withClientIdentifier('zezoo')
         .withWillTopic('heartRateTopic')
-        .withWillMessage('flutter will message')
+        .withWillMessage('flutter message')
         .startClean()
         .withWillQos(MqttQos.atLeastOnce);
 

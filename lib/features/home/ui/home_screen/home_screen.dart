@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mobile_app/core/helpers/extensions.dart';
 import 'package:mobile_app/core/helpers/spacing.dart';
 import 'package:mobile_app/core/routing/routes.dart';
 import 'package:mobile_app/core/theming/colors.dart';
 import 'package:mobile_app/core/widgets/screen_header.dart';
 import 'package:mobile_app/features/home/ui/home_screen/navigation_button.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -24,21 +26,26 @@ class HomeScreen extends StatelessWidget {
               ),
               Expanded(
                 child: Center(
-                  child: Container(
-                    width: double.infinity,
-                    padding: EdgeInsets.symmetric(vertical: 80.h),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.w),
-                      border: Border.all(
-                        width: 1,
-                        color: ColorsManager.gray,
-                      ),
-                    ),
+                  child: CircleAvatar(
+                    radius: 80.w,
+                    backgroundColor: ColorsManager.mainGreen,
+                    // width: double.infinity,
+                    // padding: EdgeInsets.symmetric(vertical: 80.h),
+                    // decoration: BoxDecoration(
+                    //   borderRadius: BorderRadius.circular(10.w),
+                    //   border: Border.all(
+                    //     width: 1,
+                    //     color: ColorsManager.gray,
+                    //   ),
+                    // ),
                     child: InkWell(
-                      child: Icon(
-                        Icons.search,
+                      onTap: () {
+                        context.pushNamed(Routes.searchRequestScreen);
+                      },
+                      child: PhosphorIcon(
+                        PhosphorIcons.magnifyingGlass(),
                         size: 100.h,
-                        color: ColorsManager.mainGreen,
+                        color: Colors.white,
                       ),
                     ),
                   ),
@@ -63,7 +70,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              verticalSpace(50.h),
+              verticalSpace(100.h),
             ],
           ),
         ),

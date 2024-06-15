@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile_app/core/helpers/spacing.dart';
 import 'package:mobile_app/core/theming/styles.dart';
 import 'package:mobile_app/core/widgets/app_dropdown_menu.dart';
 import 'package:mobile_app/core/widgets/app_text_form_field.dart';
+import 'package:mobile_app/features/auth/provider/date_provider.dart';
+import 'package:mobile_app/features/auth/ui/auth_screen/signup_screen/date_picker_field.dart';
 import 'package:mobile_app/core/widgets/green_button.dart';
+import 'package:mobile_app/core/widgets/location_picker.dart';
 import 'package:mobile_app/features/auth/provider/auth_provider.dart';
+import 'package:mobile_app/features/auth/services/auth_service.dart';
+
+// Google Maps API key: ,""AlzaSyCuTilAfnGfkZtlx0T3qf-e0mWZ_N2LpoY
 
 class SignUpScreen extends ConsumerStatefulWidget {
   const SignUpScreen({super.key});
@@ -37,7 +42,10 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
           verticalSpace(5.h),
           AppTextFormField(
             hintText: 'Three Names',
-            validation: authentication.validateFullName,
+            validation: AuthService.validateFullName,
+            submition: (value) {
+              authentication.fullName = value!;
+            },
           ),
           verticalSpace(25.h),
           Text(
@@ -47,7 +55,10 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
           verticalSpace(5.h),
           AppTextFormField(
             hintText: 'email@gmail.com',
-            validation: authentication.validateFullName,
+            validation: AuthService.validateEmail,
+            submition: (value) {
+              authentication.email = value!;
+            },
           ),
           verticalSpace(25.h),
           Text(
@@ -70,7 +81,10 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                     : Icons.visibility_outlined,
               ),
             ),
-            validation: authentication.validateFullName,
+            validation: AuthService.validatePassword,
+            submition: (value) {
+              authentication.password = value!;
+            },
           ),
           verticalSpace(25.h),
           Text(
@@ -93,7 +107,8 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                     : Icons.visibility_outlined,
               ),
             ),
-            validation: authentication.validateFullName,
+            validation: AuthService.validateConfirmPassword,
+            submition: (value) {},
           ),
           verticalSpace(25.h),
           Text(
@@ -101,35 +116,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
             style: TextStyles.h4WhiteSemiBold.copyWith(color: Colors.black),
           ),
           verticalSpace(5.h),
-          InkWell(
-            onTap: () {},
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.all(Radius.circular(8)),
-                border: Border.all(
-                  color: Colors.black,
-                  width: 1.2,
-                ),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding:
-                        EdgeInsets.symmetric(vertical: 16.h, horizontal: 15.w),
-                    child: const Text(
-                      'DD/MM/YYYY',
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(right: 10.w),
-                    child: const Icon(Icons.calendar_month),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          const DatePickerField(),
           verticalSpace(25.h),
           Text(
             'Country',
@@ -149,8 +136,33 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
           verticalSpace(5.h),
           AppTextFormField(
             hintText: '000000000',
-            validation: authentication.validateFullName,
+            prefix: Container(
+              decoration: const BoxDecoration(
+                border: Border(
+                  right: BorderSide(
+                    color: Colors.grey,
+                  ),
+                ),
+              ),
+              padding: EdgeInsets.symmetric(horizontal: 5.w),
+              margin: EdgeInsets.all(5.w),
+              child: Text(
+                '+20',
+                style: TextStyle(fontSize: 18.h),
+              ),
+            ),
+            validation: AuthService.validatePhoneNumber,
+            submition: (value) {
+              authentication.phoneNumber = value!;
+            },
           ),
+          verticalSpace(25.h),
+          Text(
+            'Home location',
+            style: TextStyles.h4WhiteSemiBold.copyWith(color: Colors.black),
+          ),
+          verticalSpace(5.h),
+          const LocationInput(),
           verticalSpace(36.h),
           Align(
             alignment: AlignmentDirectional.center,
@@ -158,7 +170,12 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
               text: 'SignUp',
               route: '/home',
               onPressed: () {
-                _key.currentState!.validate();
+                bool formFieldsValidation = _key.currentState!.validate();
+                final dateProvider = ref.watch(dateStateProvider.notifier);
+
+                if (!formFieldsValidation && !dateProvider.submitDate()) return;
+                _key.currentState!.save();
+                authentication.printAttributes();
               },
             ),
           ),
