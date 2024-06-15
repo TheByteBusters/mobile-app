@@ -21,6 +21,7 @@ class _DatePickerFieldState extends ConsumerState<DatePickerField> {
     final dateState = ref.watch(dateStateProvider);
     final dateNotifier = ref.watch(dateStateProvider.notifier);
     final authenticationProvider = ref.watch(authProvider.notifier);
+
     return InkWell(
       onTap: () {
         showDatePicker(

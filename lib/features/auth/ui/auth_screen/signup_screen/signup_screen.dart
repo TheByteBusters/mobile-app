@@ -6,9 +6,10 @@ import 'package:mobile_app/core/theming/styles.dart';
 import 'package:mobile_app/core/widgets/app_dropdown_menu.dart';
 import 'package:mobile_app/core/widgets/app_text_form_field.dart';
 import 'package:mobile_app/features/auth/provider/date_provider.dart';
+import 'package:mobile_app/features/auth/provider/location_provider.dart';
 import 'package:mobile_app/features/auth/ui/auth_screen/signup_screen/date_picker_field.dart';
 import 'package:mobile_app/core/widgets/green_button.dart';
-import 'package:mobile_app/core/widgets/location_picker.dart';
+import 'package:mobile_app/features/auth/ui/auth_screen/signup_screen/location_picker.dart';
 import 'package:mobile_app/features/auth/provider/auth_provider.dart';
 import 'package:mobile_app/features/auth/services/auth_service.dart';
 
@@ -171,11 +172,17 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
               route: '/home',
               onPressed: () {
                 bool formFieldsValidation = _key.currentState!.validate();
-                final dateProvider = ref.watch(dateStateProvider.notifier);
+                final dateValidation =
+                    ref.watch(dateStateProvider.notifier).submitDate();
+                final locationValidation =
+                    ref.watch(locationStateProvider.notifier).submitLocation();
 
-                if (!formFieldsValidation && !dateProvider.submitDate()) return;
-                _key.currentState!.save();
                 authentication.printAttributes();
+                if (dateValidation &&
+                    formFieldsValidation &&
+                    locationValidation) {
+                  _key.currentState!.save();
+                }
               },
             ),
           ),

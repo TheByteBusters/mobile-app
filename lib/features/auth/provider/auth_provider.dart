@@ -15,8 +15,10 @@ class AuthNotifier extends StateNotifier<AuthState> {
   var birthDate = '';
   var country = '';
   var phoneNumber = '';
+  var location;
 
   void pickDate() {}
+
   void printAttributes() {
     print(email);
     print(password);
@@ -24,6 +26,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
     print(fullName);
     print(country);
     print(phoneNumber);
+    print(location);
   }
 }
 

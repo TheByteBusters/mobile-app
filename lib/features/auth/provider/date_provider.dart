@@ -11,6 +11,10 @@ class DateState extends StateNotifier<InputState> {
   DateState() : super(InputState.init);
   String _date = '';
 
+  void resetState() {
+    state = InputState.init;
+  }
+
   void setDate(String value) {
     _date = value;
     state = InputState.picked;
@@ -19,10 +23,10 @@ class DateState extends StateNotifier<InputState> {
   bool submitDate() {
     if (_date == '') {
       state = InputState.empty;
-      return true;
+      return false;
     } else {
       state = InputState.submitted;
-      return false;
+      return true;
     }
   }
 
