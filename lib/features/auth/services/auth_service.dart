@@ -69,6 +69,7 @@ class AuthService {
     if (number.length != 10) {
       return 'you must provide a valide number';
     }
+    print('number: $number');
 
     return null;
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mobile_app/core/cache/auth_cache.dart';
 import 'package:mobile_app/core/routing/app_router.dart';
 import 'package:mobile_app/core/routing/routes.dart';
 import 'package:mobile_app/core/theming/colors.dart';
@@ -10,6 +11,8 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final token = AuthCache.getCacheData('token');
+
     return ScreenUtilInit(
       designSize: const Size(414, 896),
       minTextAdapt: true,
@@ -20,7 +23,9 @@ class App extends StatelessWidget {
           scaffoldBackgroundColor: Colors.white,
         ),
         debugShowCheckedModeBanner: false,
-        initialRoute: Routes.onBoardingScreen,
+        initialRoute: token == null || token == ''
+            ? Routes.onBoardingScreen
+            : Routes.homeScreen,
         onGenerateRoute: appRouter.generateRoute,
       ),
     );
