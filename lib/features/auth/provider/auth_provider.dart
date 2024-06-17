@@ -67,16 +67,17 @@ class AuthNotifier extends StateNotifier<AuthState> {
     }
 
     String token = HttpAuthUserRepository.getToken(response);
-    await AuthCache.insert('token', token);
-    await AuthCache.insert('name', fullName);
-    await AuthCache.insert('email', email);
-    await AuthCache.insert('password', password);
-    // await AuthCache.insert('birth_date', birthDate);
-    await AuthCache.insert('city', country);
-    await AuthCache.insert('phone_number', phoneNumber);
-    await AuthCache.insert('lng', lng.toString());
-    await AuthCache.insert('lat', lat.toString());
-    await AuthCache.insert('acc', acc.toString());
+    await AuthCache.insertMap({
+      'token': token,
+      'name': fullName,
+      'email': email,
+      'password': password,
+      'city': country,
+      'phone_number': phoneNumber,
+      'lng': lng.toString(),
+      'lat': lat.toString(),
+      'acc': acc.toString(),
+    });
 
     state = AuthState.signedIn;
     ctx!.pushReplacementNamed(Routes.homeScreen);
@@ -94,12 +95,17 @@ class AuthNotifier extends StateNotifier<AuthState> {
     if (response.statusCode != 200) {
       print('not valid babe');
       state = AuthState.invalid;
+      ScaffoldMessenger.of(ctx!).showSnackBar(SnackBar(
+        content: Text(HttpAuthUserRepository.getErrorMessage(response)),
+      ));
       return;
     }
 
     String token = HttpAuthUserRepository.getToken(response);
-    await AuthCache.insert('token', token);
+
     print('token: $token');
+
+    HttpAuthUserRepository.storeUserData(token);
 
     state = AuthState.signedIn;
     ctx!.pushReplacementNamed(Routes.homeScreen);

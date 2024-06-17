@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:mobile_app/core/cache/auth_cache.dart';
 import 'package:mobile_app/core/networking/http_auth.dart';
 import 'package:mobile_app/features/auth/models/user_model.dart';
 
@@ -33,8 +34,12 @@ class HttpAuthUserRepository {
     return response;
   }
 
-  static getToken(http.Response response) {
+  static String getToken(http.Response response) {
     return jsonDecode(response.body)['authorizationToken'];
+  }
+
+  static String getErrorMessage(http.Response errorResponse) {
+    return jsonDecode(errorResponse.body)['error']['message'];
   }
 
   static Future<http.Response> loginUser(String email, String password) async {
@@ -45,5 +50,13 @@ class HttpAuthUserRepository {
     dynamic response = await HTTPAuth.loginUser(json);
 
     return response;
+  }
+
+  static storeUserData(String token) async {
+    http.Response response = await HTTPAuth.getUserData(token);
+    dynamic data = jsonDecode(response.body);
+    print(response.body);
+    AuthCache.insert('token', token);
+    AuthCache.insertMap(data);
   }
 }

@@ -23,10 +23,23 @@ class HTTPAuth {
     const path = 'user/login';
     final url = Uri.https(_urlAddress, path);
 
+    print('sent to server');
     final response = await http.post(
       url,
       headers: _header,
       body: json,
+    );
+    print('server responded');
+
+    return response;
+  }
+
+  static Future<http.Response> getUserData(String token) async {
+    const path = 'user';
+    final url = Uri.https(_urlAddress, path);
+    final response = await http.get(
+      url,
+      headers: {'Content-Type': 'application/json', 'Authorization': token},
     );
 
     return response;

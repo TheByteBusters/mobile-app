@@ -22,4 +22,15 @@ class AuthCache {
   static Future<bool> cleanCache() async {
     return await sharedPref.clear();
   }
+
+  static Future<bool> insertMap(Map<String, dynamic> data) async {
+    try {
+      for (var item in data.entries) {
+        await sharedPref.setString(item.key, item.value);
+      }
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
 }
