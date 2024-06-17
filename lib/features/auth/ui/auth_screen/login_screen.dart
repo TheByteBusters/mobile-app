@@ -20,12 +20,13 @@ class LoginScreen extends ConsumerStatefulWidget {
 
 class _LoginScreenState extends ConsumerState<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
+  GlobalKey<_LoginScreenState> loginContext = GlobalKey();
   bool isObscureText = true;
 
   @override
   Widget build(BuildContext context) {
     final authentication = ref.watch(authProvider.notifier);
-
+    final authState = ref.watch(authProvider);
     return Form(
       key: _formKey,
       child: Column(
@@ -85,13 +86,13 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             child: GreenButton(
               text: 'Login',
               route: '/home',
-              onPressed: () {
-                // if (_formKey.currentState!.validate()) {
-                FocusManager.instance.primaryFocus?.unfocus();
-                context.pushNamed(Routes.homeScreen);
-                // print('pressed');
-                // HTTPAuth.loginUser();
-                // }
+              onPressed: () async {
+                if (_formKey.currentState!.validate()) {
+                  _formKey.currentState!.save();
+                  FocusManager.instance.primaryFocus?.unfocus();
+                  print('login button pressed');
+                  await authentication.loginParent();
+                }
               },
             ),
           ),

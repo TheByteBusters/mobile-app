@@ -178,11 +178,13 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                     ref.watch(locationStateProvider.notifier).submitLocation();
 
                 authentication.printAttributes();
-                if (dateValidation &&
-                    formFieldsValidation &&
-                    locationValidation) {
-                  _key.currentState!.save();
-                }
+
+                if (!dateValidation ||
+                    !formFieldsValidation ||
+                    !locationValidation) return;
+
+                _key.currentState!.save();
+                authentication.signupParent();
               },
             ),
           ),

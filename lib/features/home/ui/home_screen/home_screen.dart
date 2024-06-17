@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mobile_app/core/cache/auth_cache.dart';
 import 'package:mobile_app/core/helpers/extensions.dart';
 import 'package:mobile_app/core/helpers/spacing.dart';
 import 'package:mobile_app/core/routing/routes.dart';
@@ -13,6 +14,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(AuthCache.getCacheData('token'));
+
     return Scaffold(
       body: SafeArea(
         child: Padding(

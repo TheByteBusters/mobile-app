@@ -57,7 +57,9 @@ class _LocationInputState extends ConsumerState<LocationInput> {
             await locationProvider.getCurrentLocation();
 
             if (locationState != LocationInputState.failed) {
-              authentication.location = locationProvider.location;
+              authentication.lng = locationProvider.lng;
+              authentication.lat = locationProvider.lat;
+              authentication.acc = locationProvider.acc;
             }
           },
           child: Container(

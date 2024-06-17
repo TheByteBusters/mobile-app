@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile_app/core/routing/routes.dart';
 import 'package:mobile_app/core/widgets/green_button.dart';
 import 'package:mobile_app/core/widgets/screen_header.dart';
+import 'package:mobile_app/features/auth/provider/auth_provider.dart';
 import 'package:mobile_app/features/auth/ui/get_started/role_tile.dart';
 
-class GetStartedScreen extends StatefulWidget {
+class GetStartedScreen extends ConsumerStatefulWidget {
   const GetStartedScreen({super.key});
 
   @override
-  State<GetStartedScreen> createState() => _GetStartedScreenState();
+  ConsumerState<GetStartedScreen> createState() => _GetStartedScreenState();
 }
 
-enum Role { parent, doctor }
-
-class _GetStartedScreenState extends State<GetStartedScreen> {
+class _GetStartedScreenState extends ConsumerState<GetStartedScreen> {
   Role _selectedRole = Role.parent;
 
   @override
   Widget build(BuildContext context) {
+    final authentication = ref.watch(authProvider.notifier);
     return Scaffold(
       body: SafeArea(
         child: Center(
@@ -37,6 +38,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                 onTapFunction: () {
                   setState(() {
                     _selectedRole = Role.parent;
+                    authentication.role = Role.parent;
                   });
                 },
               ),
@@ -45,10 +47,11 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                 icon: Icons.medical_information_outlined,
                 titleText: 'I\'m a Doctor',
                 subtitleText: 'Workign in a hospital',
-                selected: _selectedRole == Role.doctor,
+                selected: _selectedRole == Role.staff,
                 onTapFunction: () {
                   setState(() {
-                    _selectedRole = Role.doctor;
+                    _selectedRole = Role.staff;
+                    authentication.role = Role.staff;
                   });
                 },
               ),

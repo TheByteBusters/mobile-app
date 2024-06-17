@@ -12,7 +12,9 @@ enum LocationInputState {
 
 class LocationState extends StateNotifier<LocationInputState> {
   LocationState() : super(LocationInputState.init);
-  Map<String, double>? _location;
+  double? _lat;
+  double? _lng;
+  double? _acc;
 
   Future<void> getCurrentLocation() async {
     Location location = Location();
@@ -38,14 +40,13 @@ class LocationState extends StateNotifier<LocationInputState> {
 
     state = LocationInputState.picked;
 
-    final lat = locationData.latitude;
-    final lng = locationData.longitude;
-
-    _location = {'lat': lat!, 'lng': lng!};
+    _lat = locationData.latitude;
+    _lng = locationData.longitude;
+    _acc = locationData.accuracy;
   }
 
   bool submitLocation() {
-    if (_location == null) {
+    if (_lat == null || _lng == null || _acc == null) {
       state = LocationInputState.empty;
       return false;
     } else {
@@ -54,8 +55,16 @@ class LocationState extends StateNotifier<LocationInputState> {
     }
   }
 
-  get location {
-    return _location;
+  get lat {
+    return _lat;
+  }
+
+  get lng {
+    return _lng;
+  }
+
+  get acc {
+    return _acc;
   }
 }
 
