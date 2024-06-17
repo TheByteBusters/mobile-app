@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mobile_app/core/cache/auth_cache.dart';
 import 'package:mobile_app/core/helpers/spacing.dart';
 import 'package:mobile_app/core/theming/colors.dart';
 import 'package:mobile_app/core/theming/styles.dart';
@@ -26,6 +27,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
     authentication.ctx = context;
     final authState = ref.watch(authProvider);
     Widget content = const LoginScreen();
+    String? token = AuthCache.getCacheData('token');
 
     if (authState == AuthState.validating) {
       content = Container(
@@ -49,7 +51,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                   subtitle: haveAccount
                       ? 'Welcome to our app'
                       : 'We hope to fulfill your needs',
-                  withReturn: true,
+                  withReturn: token == null ? true : false,
                 ),
                 verticalSpace(80),
                 Padding(

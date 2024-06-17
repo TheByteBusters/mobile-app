@@ -108,7 +108,10 @@ class AuthNotifier extends StateNotifier<AuthState> {
     HttpAuthUserRepository.storeUserData(token);
 
     state = AuthState.signedIn;
-    ctx!.pushReplacementNamed(Routes.homeScreen);
+    ctx!.pushNamedAndRemoveUntil(
+      Routes.homeScreen,
+      predicate: (Route<dynamic> route) => false,
+    );
   }
 
   Future<void> checkCache() async {

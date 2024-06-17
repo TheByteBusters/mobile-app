@@ -12,7 +12,7 @@ import 'package:mobile_app/features/search/ui/search_screen/search_screen.dart';
 class AppRouter {
   Route generateRoute(RouteSettings settings) {
     // arguments to passe to any screen
-    final arguments = settings.arguments;
+    // final arguments = settings.arguments;
 
     switch (settings.name) {
       case Routes.onBoardingScreen:
@@ -47,6 +47,8 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const ProfileScreen(),
         );
+      case '/':
+      
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

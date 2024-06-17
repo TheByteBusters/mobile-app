@@ -56,7 +56,9 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             Positioned(
               left: 0,
               child: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.pop();
+                },
                 icon: const Icon(Icons.arrow_back),
               ),
             ),
@@ -128,7 +130,9 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                       onTap: () async {
                         await AuthCache.insert('token', '');
                         if (context.mounted) {
-                          context.pushReplacementNamed(Routes.authScreen);
+                          context.pushNamedAndRemoveUntil(
+                              Routes.getStartedScreen,
+                              predicate: (Route<dynamic> route) => false);
                         }
                       },
                     ),

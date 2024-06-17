@@ -12,6 +12,13 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final token = AuthCache.getCacheData('token');
+    String route = Routes.homeScreen;
+
+    if (token == null) {
+      route = Routes.onBoardingScreen;
+    } else if (token == '') {
+      route = Routes.getStartedScreen;
+    }
 
     return ScreenUtilInit(
       designSize: const Size(414, 896),
@@ -23,9 +30,7 @@ class App extends StatelessWidget {
           scaffoldBackgroundColor: Colors.white,
         ),
         debugShowCheckedModeBanner: false,
-        initialRoute: token == null || token == ''
-            ? Routes.onBoardingScreen
-            : Routes.homeScreen,
+        initialRoute: route,
         onGenerateRoute: appRouter.generateRoute,
       ),
     );
