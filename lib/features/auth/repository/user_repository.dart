@@ -34,7 +34,7 @@ class HttpAuthUserRepository {
   }
 
   static getToken(http.Response response) {
-    return jsonDecode(response.body)['jwt_token'];
+    return jsonDecode(response.body)['authorizationToken'];
   }
 
   static Future<http.Response> loginUser(String email, String password) async {

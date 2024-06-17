@@ -10,6 +10,7 @@ enum AuthState {
   init,
   validating,
   valid,
+  invalid,
   signedIn,
   loggedOut,
 }
@@ -59,7 +60,10 @@ class AuthNotifier extends StateNotifier<AuthState> {
     );
 
     if (response.statusCode != 200) {
-      print('error resopnse: ${response.statusCode}');
+      print('not valid babe');
+      state = AuthState.invalid;
+      print('error resopnse: ${response.body}');
+      return;
     }
 
     String token = HttpAuthUserRepository.getToken(response);
@@ -73,7 +77,6 @@ class AuthNotifier extends StateNotifier<AuthState> {
     await AuthCache.insert('lng', lng.toString());
     await AuthCache.insert('lat', lat.toString());
     await AuthCache.insert('acc', acc.toString());
-
 
     state = AuthState.signedIn;
     ctx!.pushReplacementNamed(Routes.homeScreen);
@@ -89,6 +92,8 @@ class AuthNotifier extends StateNotifier<AuthState> {
     print("login response: ${response.body}");
 
     if (response.statusCode != 200) {
+      print('not valid babe');
+      state = AuthState.invalid;
       return;
     }
 

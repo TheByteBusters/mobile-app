@@ -25,22 +25,13 @@ class HomeScreen extends StatelessWidget {
               const ScreenHeader(
                 title: 'Welcome!',
                 subtitle: 'We will help you find an incubator',
-                withReturn: true,
+                withReturn: false,
               ),
               Expanded(
                 child: Center(
                   child: CircleAvatar(
                     radius: 80.w,
                     backgroundColor: ColorsManager.mainGreen,
-                    // width: double.infinity,
-                    // padding: EdgeInsets.symmetric(vertical: 80.h),
-                    // decoration: BoxDecoration(
-                    //   borderRadius: BorderRadius.circular(10.w),
-                    //   border: Border.all(
-                    //     width: 1,
-                    //     color: ColorsManager.gray,
-                    //   ),
-                    // ),
                     child: InkWell(
                       onTap: () {
                         context.pushNamed(Routes.searchRequestScreen);
@@ -57,9 +48,9 @@ class HomeScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const NavigationButton(
-                    route: '/home/searchRequestScreen',
-                    icon: Icons.handshake_outlined,
+                  NavigationButton(
+                    route: Routes.profileScreen,
+                    icon: PhosphorIcons.handCoins(),
                   ),
                   horizontalSpace(20.w),
                   const NavigationButton(
@@ -68,7 +59,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   horizontalSpace(20.w),
                   const NavigationButton(
-                    route: '/home/searchRequestScreen',
+                    route: Routes.profileScreen,
                     icon: Icons.account_circle_outlined,
                   ),
                 ],

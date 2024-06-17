@@ -5,6 +5,7 @@ import 'package:mobile_app/features/auth/ui/get_started/get_started_screen.dart'
 import 'package:mobile_app/features/monitoring/ui/monitoring_screen.dart';
 import 'package:mobile_app/features/onboarding/onboarding_screen.dart';
 import 'package:mobile_app/features/home/ui/home_screen/home_screen.dart';
+import 'package:mobile_app/features/profile/ui/profile_screen/profile_screen.dart';
 import 'package:mobile_app/features/search/ui/search_request_screen.dart';
 import 'package:mobile_app/features/search/ui/search_screen/search_screen.dart';
 
@@ -41,6 +42,10 @@ class AppRouter {
       case Routes.monitoringScreen:
         return MaterialPageRoute(
           builder: (_) => const MonitoringScreen(),
+        );
+      case Routes.profileScreen:
+        return MaterialPageRoute(
+          builder: (_) => const ProfileScreen(),
         );
       default:
         return MaterialPageRoute(

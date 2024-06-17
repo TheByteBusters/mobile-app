@@ -7,7 +7,7 @@ class HTTPAuth {
   static const _header = {'Content-Type': 'application/json'};
 
   static Future<http.Response> signupUser(String json) async {
-    const path = 'users/auth/signup';
+    const path = 'user/signup';
     final url = Uri.https(_urlAddress, path);
 
     final response = await http.post(
@@ -20,7 +20,7 @@ class HTTPAuth {
   }
 
   static Future<http.Response> loginUser(String json) async {
-    const path = 'users/auth/login';
+    const path = 'user/login';
     final url = Uri.https(_urlAddress, path);
 
     final response = await http.post(

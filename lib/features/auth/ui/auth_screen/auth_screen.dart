@@ -25,13 +25,15 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
     final authentication = ref.watch(authProvider.notifier);
     authentication.ctx = context;
     final authState = ref.watch(authProvider);
-    Widget content = haveAccount ? const LoginScreen() : const SignUpScreen();
+    Widget content = const LoginScreen();
 
     if (authState == AuthState.validating) {
       content = Container(
         margin: EdgeInsets.only(top: 200.h, bottom: 200.h),
         child: const CircularProgressIndicator(),
       );
+    } else {
+      content = haveAccount ? const LoginScreen() : const SignUpScreen();
     }
 
     return Scaffold(

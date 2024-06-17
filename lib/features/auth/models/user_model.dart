@@ -43,11 +43,11 @@ class UserModel {
       // 'birthDate': birthDate,
       'city': country,
       'address': country,
-      'phone_number': phoneNumber,
+      'phoneNumber': phoneNumber,
       'longitude': lng,
       'latitude': lat,
       'accuracy': acc,
-      'national_id': '302030303505'
+      'nationalId': '30203030350529'
     };
 
     return map;

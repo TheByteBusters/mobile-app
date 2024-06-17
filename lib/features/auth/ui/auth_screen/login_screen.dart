@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mobile_app/core/helpers/extensions.dart';
 import 'package:mobile_app/core/helpers/spacing.dart';
-import 'package:mobile_app/core/routing/routes.dart';
 import 'package:mobile_app/core/theming/colors.dart';
 import 'package:mobile_app/core/theming/styles.dart';
 import 'package:mobile_app/core/widgets/app_text_form_field.dart';
@@ -20,13 +18,12 @@ class LoginScreen extends ConsumerStatefulWidget {
 
 class _LoginScreenState extends ConsumerState<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
-  GlobalKey<_LoginScreenState> loginContext = GlobalKey();
   bool isObscureText = true;
 
   @override
   Widget build(BuildContext context) {
     final authentication = ref.watch(authProvider.notifier);
-    final authState = ref.watch(authProvider);
+
     return Form(
       key: _formKey,
       child: Column(
