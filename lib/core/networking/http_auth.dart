@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 
 class HTTPAuth {
@@ -24,14 +26,27 @@ class HTTPAuth {
     final url = Uri.https(_urlAddress, path);
 
     print('sent to server');
-    final response = await http.post(
-      url,
-      headers: _header,
-      body: json,
-    );
-    print('server responded');
 
-    return response;
+    try {
+
+      final response = await http.post(
+        url,
+        headers: _header,
+        body: json,
+      );
+
+      print('server responded');
+      return response;
+
+    } catch (e) {
+
+      print('the problem is: $e');
+      final errorMessage = jsonEncode({
+        'error': {'message': 'server timedout, please try again!'}
+      });
+
+      return http.Response(errorMessage, 400);
+    }
   }
 
   static Future<http.Response> getUserData(String token) async {
