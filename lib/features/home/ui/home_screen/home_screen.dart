@@ -8,9 +8,24 @@ import 'package:mobile_app/core/theming/colors.dart';
 import 'package:mobile_app/core/widgets/screen_header.dart';
 import 'package:mobile_app/features/home/ui/home_screen/navigation_button.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:url_launcher/url_launcher.dart' as launcher;
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
+
+  void launchURL(BuildContext context) async {
+    final url = Uri.https('egyptiancurebank.com');
+
+    if (await launcher.canLaunchUrl(url)) {
+      await launcher.launchUrl(url);
+    } else {
+      if (!context.mounted) throw 'Could not launch the url';
+
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('could\'t redirect to egyptiancurebank'),
+      ));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +66,9 @@ class HomeScreen extends StatelessWidget {
                   NavigationButton(
                     route: Routes.profileScreen,
                     icon: PhosphorIcons.handCoins(),
+                    tapMethod: () {
+                      launchURL(context);
+                    },
                   ),
                   horizontalSpace(20.w),
                   const NavigationButton(

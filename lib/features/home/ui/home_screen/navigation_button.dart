@@ -8,19 +8,22 @@ class NavigationButton extends StatelessWidget {
     super.key,
     required this.icon,
     required this.route,
+    this.tapMethod,
   });
 
   final IconData icon;
   final String route;
+  final void Function()? tapMethod;
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: InkWell(
         borderRadius: BorderRadius.circular(10.w),
-        onTap: () {
-          context.pushNamed(route);
-        },
+        onTap: tapMethod ??
+            () {
+              context.pushNamed(route);
+            },
         child: Center(
           child: Container(
             width: double.infinity,
