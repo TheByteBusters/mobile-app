@@ -56,7 +56,7 @@ class HttpAuthUserRepository {
     http.Response response = await HTTPAuth.getUserData(token);
     dynamic data = jsonDecode(response.body);
     print(response.body);
-    AuthCache.insert('token', token);
+    AuthCache.insertString('token', token);
     AuthCache.insertMap(data);
   }
 }

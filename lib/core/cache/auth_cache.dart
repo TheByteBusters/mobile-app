@@ -7,12 +7,16 @@ class AuthCache {
     sharedPref = await SharedPreferences.getInstance();
   }
 
-  static Future<bool> insert(String key, String value) async {
+  static Future<bool> insertString(String key, String value) async {
     return await sharedPref.setString(key, value);
   }
 
-  static String? getCacheData(String key) {
-    return sharedPref.getString(key);
+  static Future<bool> insertDouble(String key, double value) async {
+    return await sharedPref.setDouble(key, value);
+  }
+
+  static dynamic getCacheData(String key) {
+    return sharedPref.get(key);
   }
 
   static Future<bool> deleteCacheItem(String key) async {
@@ -26,7 +30,11 @@ class AuthCache {
   static Future<bool> insertMap(Map<String, dynamic> data) async {
     try {
       for (var item in data.entries) {
-        await sharedPref.setString(item.key, item.value);
+        if (item.value is double) {
+          await sharedPref.setDouble(item.key, item.value);
+        } else {
+          await sharedPref.setString(item.key, item.value);
+        }
       }
       return true;
     } catch (e) {

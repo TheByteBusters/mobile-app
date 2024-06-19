@@ -124,11 +124,16 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
             style: TextStyles.h4WhiteSemiBold.copyWith(color: Colors.black),
           ),
           verticalSpace(5.h),
-          const AppDropdownMenu(items: {
-            'Damietta': 0,
-            'El-Mansoura': 1,
-            'Bort-Said': 2,
-          }),
+          AppDropdownMenu(
+            items: const {
+              'Damietta': 0,
+              'El-Mansoura': 1,
+              'Bort-Said': 2,
+            },
+            saveFunction: (value) {
+              authentication.country = value;
+            },
+          ),
           verticalSpace(25.h),
           Text(
             'Phone number',

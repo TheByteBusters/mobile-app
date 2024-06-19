@@ -128,7 +128,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                       ),
                       tileColor: Colors.blueGrey.shade50,
                       onTap: () async {
-                        await AuthCache.insert('token', '');
+                        await AuthCache.insertString('token', '');
                         if (context.mounted) {
                           context.pushNamedAndRemoveUntil(
                               Routes.getStartedScreen,

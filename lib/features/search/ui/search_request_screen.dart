@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile_app/core/helpers/spacing.dart';
 import 'package:mobile_app/core/routing/routes.dart';
+import 'package:mobile_app/core/theming/styles.dart';
 import 'package:mobile_app/core/widgets/app_dropdown_menu.dart';
 import 'package:mobile_app/core/widgets/green_button.dart';
 import 'package:mobile_app/core/widgets/screen_header.dart';
+import 'package:mobile_app/features/search/providers/search_provider.dart';
 
-class SearchRequestScreen extends StatelessWidget {
+class SearchRequestScreen extends ConsumerWidget {
   const SearchRequestScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final search = ref.watch(searchProvider.notifier);
+    final searchState = ref.watch(searchProvider);
+
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -23,29 +29,72 @@ class SearchRequestScreen extends StatelessWidget {
                 withReturn: true,
               ),
               verticalSpace(36.h),
-              const AppDropdownMenu(items: {
-                'Pathological Case': 0,
-                'Oxygen defficiency': 1,
-                'Early birth': 2,
-              }),
-              verticalSpace(20.h),
-              const AppDropdownMenu(items: {
-                'Class': 0,
-                'Charity': 1,
-                'Economy': 2,
-                'Private': 3,
-                'VIP': 4,
-              }),
-              verticalSpace(20.h),
-              const AppDropdownMenu(items: {
-                'Duration': 0,
-                'less than 30 days': 1,
-                'more than 30 days': 2,
-              }),
+              Container(
+                height: 300.h,
+                padding: EdgeInsets.all(5.w),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Pathological Case',
+                      style: TextStyles.h4WhiteSemiBold
+                          .copyWith(color: Colors.black),
+                    ),
+                    verticalSpace(5.h),
+                    AppDropdownMenu(
+                      items: const {
+                        'Oxygen defficiency': 0,
+                        'Early birth': 1,
+                      },
+                      saveFunction: (value) {
+                        search.pathologicalCase = value;
+                      },
+                    ),
+                    verticalSpace(20.h),
+                    Text(
+                      'Class',
+                      style: TextStyles.h4WhiteSemiBold
+                          .copyWith(color: Colors.black),
+                    ),
+                    verticalSpace(5.h),
+                    AppDropdownMenu(
+                      items: const {
+                        'Economy': 0,
+                        'Charity': 1,
+                        'Private': 2,
+                        'VIP': 3,
+                      },
+                      saveFunction: (value) {
+                        search.hospitalClass = value;
+                      },
+                    ),
+                    verticalSpace(20.h),
+                    Text(
+                      'Duration',
+                      style: TextStyles.h4WhiteSemiBold
+                          .copyWith(color: Colors.black),
+                    ),
+                    verticalSpace(5.h),
+                    AppDropdownMenu(
+                      items: const {
+                        'less than 30 days': 0,
+                        'more than 30 days': 1,
+                      },
+                      saveFunction: (value) {
+                        search.duration = value;
+                      },
+                    ),
+                  ],
+                ),
+              ),
               const Spacer(),
-              const GreenButton(
+              GreenButton(
                 text: 'Continue',
                 route: Routes.searchingScreen,
+                onPressed: () {
+                  search.findHospital(context);
+                },
               ),
               verticalSpace(105.h)
             ],

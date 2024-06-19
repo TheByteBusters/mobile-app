@@ -7,9 +7,11 @@ class AppDropdownMenu extends ConsumerStatefulWidget {
   const AppDropdownMenu({
     super.key,
     required this.items,
+    required this.saveFunction,
   });
 
   final Map<String, int> items;
+  final void Function(String value) saveFunction;
 
   @override
   ConsumerState<AppDropdownMenu> createState() => _AppDropdownMenuState();
@@ -20,7 +22,7 @@ class _AppDropdownMenuState extends ConsumerState<AppDropdownMenu> {
 
   @override
   Widget build(BuildContext context) {
-    final authentication = ref.watch(authProvider.notifier);
+    // final provider = ref.watch(authProvider.notifier);
 
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 1.h),
@@ -49,7 +51,8 @@ class _AppDropdownMenuState extends ConsumerState<AppDropdownMenu> {
               )
               .toList(),
           onSaved: (value) {
-            authentication.country = widget.items.keys.toList()[value!];
+            String valueText = widget.items.keys.toList()[value!];
+            widget.saveFunction(valueText);
           },
           decoration: const InputDecoration(border: InputBorder.none),
         ),
