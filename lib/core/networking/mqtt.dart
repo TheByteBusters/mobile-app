@@ -13,7 +13,7 @@ class MqttNetwork {
 
     final connMess = MqttConnectMessage()
         .withClientIdentifier('zezoo')
-        .withWillTopic('heartRateTopic')
+        .withWillTopic('HeartRate&SPO2')
         .withWillMessage('flutter message')
         .startClean()
         .withWillQos(MqttQos.atLeastOnce);
@@ -39,7 +39,6 @@ class MqttNetwork {
       client.disconnect();
       throw Exception('client connection failed ${client.connectionStatus}');
     }
-    // subscribeToTopic('heartRateTopic');
   }
 
   static void subscribeToTopic(String topicName) {

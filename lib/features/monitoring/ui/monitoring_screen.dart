@@ -5,6 +5,7 @@ import 'package:mobile_app/core/helpers/spacing.dart';
 import 'package:mobile_app/core/theming/colors.dart';
 import 'package:mobile_app/core/widgets/screen_header.dart';
 import 'package:mobile_app/features/monitoring/provider/sensor_provider.dart';
+import 'package:mobile_app/features/monitoring/ui/monitoring_tile.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class MonitoringScreen extends ConsumerStatefulWidget {
@@ -18,7 +19,7 @@ class _MonitoringScreenState extends ConsumerState<MonitoringScreen> {
   @override
   Widget build(BuildContext context) {
     ref.watch(sensorProvider.notifier).connectProker();
-    String reading = ref.watch(sensorProvider);
+    Map<String, String>? reading = ref.watch(sensorProvider);
 
     return Scaffold(
       body: SafeArea(
@@ -31,52 +32,45 @@ class _MonitoringScreenState extends ConsumerState<MonitoringScreen> {
             ),
             verticalSpace(150.h),
             Center(
-              child: Container(
-                margin: EdgeInsets.all(16.w),
-                padding: EdgeInsets.symmetric(horizontal: 8.w),
-                decoration: BoxDecoration(
-                  border: Border.all(
+              child: Column(
+                children: [
+                  MonitoringTile(
+                    title: 'Heart Rate',
+                    reading: reading == null ? '0' : reading['heartRate']!,
                     color: ColorsManager.mainGreen,
-                    width: 2,
+                    measuringUnit: ' BPM',
+                    leading: PhosphorIcon(
+                      PhosphorIcons.heartbeat(),
+                      color: Colors.white,
+                      size: 50.h,
+                    ),
                   ),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      radius: 35.w,
-                      backgroundColor: ColorsManager.mainGreen,
-                      child: PhosphorIcon(
-                        PhosphorIcons.heartbeat(),
-                        color: Colors.white,
-                        size: 50.h,
-                      ),
-                    ),
-                    horizontalSpace(10.w),
-                    const Text(
-                      'Heart rate',
-                      style: TextStyle(fontSize: 21),
-                    ),
-                    const Spacer(),
-                    Text(
-                      reading,
-                      style: const TextStyle(
-                        fontSize: 60,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.only(top: 20),
-                      child: Text(
-                        'BPM',
-                        style: TextStyle(
-                          color: Colors.red,
-                          fontSize: 12,
+                  MonitoringTile(
+                    title: 'SPO2',
+                    reading: reading == null ? '0' : reading['spo2']!,
+                    color: const Color(0xFFFFD166),
+                    measuringUnit: '   %   ',
+                    leading: Row(
+                      children: [
+                        horizontalSpace(16.w),
+                        const Text(
+                          'O',
+                          style: TextStyle(
+                            fontSize: 45,
+                            color: Colors.white,
+                          ),
                         ),
-                      ),
+                        const Text(
+                          '2',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.white,
+                          ),
+                        )
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ],

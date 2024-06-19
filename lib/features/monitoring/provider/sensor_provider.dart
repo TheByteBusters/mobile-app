@@ -2,8 +2,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobile_app/core/networking/mqtt.dart';
 import 'package:mqtt_client/mqtt_client.dart';
 
-class SensorNotifier extends StateNotifier<String> {
-  SensorNotifier() : super('0');
+class SensorNotifier extends StateNotifier<Map<String, String>?> {
+  SensorNotifier() : super(null);
   var connected = false;
 
   void connectProker() async {
@@ -11,7 +11,7 @@ class SensorNotifier extends StateNotifier<String> {
       await MqttNetwork.connect();
       print('done');
       connected = true;
-      subscribeToTopic('heartRateTopic');
+      subscribeToTopic('HeartRate&SPO2');
     }
   }
 
@@ -27,11 +27,27 @@ class SensorNotifier extends StateNotifier<String> {
 
       print('YOU GOT A NEW MESSAGE:');
       print(message);
-      state = message.substring(0, message.length - 1);
+      state = messageToMap(message);
     });
+  }
+
+  Map<String, String> messageToMap(String message) {
+    int hrStart = message.indexOf(' ') + 1;
+    int hrEnd = message.indexOf(',');
+    String hrReading = message.substring(hrStart, hrEnd);
+
+    int spoStart = message.indexOf('SPO2') + 5;
+    int spoEnd = message.length;
+    String spoReading = message.substring(spoStart, spoEnd);
+
+    return {
+      'heartRate': hrReading,
+      'spo2': spoReading,
+    };
   }
 }
 
-final sensorProvider = StateNotifierProvider<SensorNotifier, String>(
+final sensorProvider =
+    StateNotifierProvider<SensorNotifier, Map<String, String>?>(
   (ref) => SensorNotifier(),
 );
