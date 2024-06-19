@@ -41,15 +41,16 @@ class SearchNotifier extends StateNotifier<SearchState> {
     } else if (response.statusCode != 200) {
       // in case any thing wrong happens
       state = SearchState.faild;
+      context.pop();
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('Something went wrong! please try again'),
       ));
+      searchAttempt = 0;
       return;
     }
 
     hospital = Hospital.fromJson(jsonDecode(response.body));
     state = SearchState.found;
-
   }
 }
 

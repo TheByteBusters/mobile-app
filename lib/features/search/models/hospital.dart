@@ -4,7 +4,6 @@ class Hospital {
   final String address;
   final String city;
   final String type;
-  final String email;
   final String phoneNumber;
 
   const Hospital({
@@ -13,7 +12,6 @@ class Hospital {
     required this.address,
     required this.city,
     required this.type,
-    required this.email,
     required this.phoneNumber,
   });
 
@@ -24,7 +22,6 @@ class Hospital {
       address: json['address'],
       city: json['city'],
       type: json['type'],
-      email: json['email'],
       phoneNumber: json['phone_number'],
     );
   }
@@ -33,9 +30,9 @@ class Hospital {
     return {
       'id': id,
       'name': name,
+      'address': address,
       'city': city,
       'type': type,
-      'email': email,
       'phone_number': phoneNumber,
     };
   }

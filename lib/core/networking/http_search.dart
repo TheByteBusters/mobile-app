@@ -10,7 +10,7 @@ class HttpSearch {
       LocationModel location, int searchAttempt) async {
     final token = AuthCache.getCacheData('token');
     final url =
-        'https://$_urlAddress/hospitals?latitude=${location.lat}&longitude=${location.lat}&page=$searchAttempt';
+        'https://$_urlAddress/hospitals?latitude=${location.lat}&longitude=${location.lat}&cursor=$searchAttempt';
     // final url = Uri.https(query);
 
     print(url);

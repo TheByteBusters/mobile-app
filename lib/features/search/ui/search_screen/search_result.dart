@@ -5,7 +5,33 @@ import 'package:mobile_app/core/theming/colors.dart';
 import 'package:mobile_app/core/theming/styles.dart';
 
 class SearchResult extends StatelessWidget {
-  const SearchResult({super.key});
+  const SearchResult({
+    super.key,
+    required this.name,
+    required this.address,
+    required this.city,
+    required this.phoneNumber,
+    required this.type,
+  });
+
+  final String name;
+  final String address;
+  final String city;
+  final String phoneNumber;
+  final String type;
+
+  String get price {
+    switch (type) {
+      case 'public':
+        return 'Low price';
+      case 'private':
+        return 'High price';
+      case 'charity':
+        return 'Free';
+      default:
+        return 'Economy';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +53,7 @@ class SearchResult extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: Text(
-              'Damietta Specialized Hospital',
+              name,
               style: TextStyles.h2BlackNormal,
               textAlign: TextAlign.center,
             ),
@@ -45,23 +71,23 @@ class SearchResult extends StatelessWidget {
             ],
           ),
           Text(
-            'El-Taawon, Gism Damietta, Damietta Desert',
+            '$city, $address',
             style: TextStyles.smallFadded,
           ),
           verticalSpace(20.h),
           Row(
             children: [
               Icon(
-                Icons.info_outline_rounded,
+                Icons.phone_outlined,
                 color: ColorsManager.mainGreen,
                 size: 30.h,
               ),
               horizontalSpace(5.w),
-              Text('About', style: TextStyles.h4BlackNormal),
+              Text('Contact', style: TextStyles.h4BlackNormal),
             ],
           ),
           Text(
-            'Sepcialized Hospital',
+            phoneNumber,
             style: TextStyles.smallFadded,
           ),
           verticalSpace(20.h),
@@ -77,7 +103,7 @@ class SearchResult extends StatelessWidget {
             ],
           ),
           Text(
-            'Low price',
+            price,
             style: TextStyles.smallFadded,
           ),
           verticalSpace(20.h),
