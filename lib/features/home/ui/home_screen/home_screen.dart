@@ -30,6 +30,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print(AuthCache.getCacheData('token'));
+    final String role = AuthCache.getCacheData('role');
 
     return Scaffold(
       body: SafeArea(
@@ -42,39 +43,42 @@ class HomeScreen extends StatelessWidget {
                 subtitle: 'We will help you find an incubator',
                 withReturn: false,
               ),
-              Expanded(
-                child: Center(
-                  child: CircleAvatar(
-                    radius: 80.w,
-                    backgroundColor: ColorsManager.mainGreen,
-                    child: InkWell(
-                      onTap: () {
-                        context.pushNamed(Routes.searchRequestScreen);
-                      },
-                      child: PhosphorIcon(
-                        PhosphorIcons.magnifyingGlass(),
-                        size: 100.h,
-                        color: Colors.white,
+              role == 'parent'
+                  ? Expanded(
+                      child: Center(
+                        child: CircleAvatar(
+                          radius: 80.w,
+                          backgroundColor: ColorsManager.mainGreen,
+                          child: InkWell(
+                            onTap: () {
+                              context.pushNamed(Routes.searchRequestScreen);
+                            },
+                            child: PhosphorIcon(
+                              PhosphorIcons.magnifyingGlass(),
+                              size: 100.h,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                ),
-              ),
+                    )
+                  : verticalSpace(250.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   NavigationButton(
-                    route: Routes.profileScreen,
+                    route: '/',
                     icon: PhosphorIcons.handCoins(),
                     tapMethod: () {
                       launchURL(context);
                     },
                   ),
                   horizontalSpace(20.w),
-                  const NavigationButton(
-                    route: Routes.monitoringScreen,
-                    icon: Icons.monitor_heart_outlined,
-                  ),
+                  if (role == 'parent')
+                    const NavigationButton(
+                      route: Routes.monitoringScreen,
+                      icon: Icons.monitor_heart_outlined,
+                    ),
                   horizontalSpace(20.w),
                   const NavigationButton(
                     route: Routes.profileScreen,

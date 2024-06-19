@@ -15,7 +15,6 @@ class SearchRequestScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final search = ref.watch(searchProvider.notifier);
-    final searchState = ref.watch(searchProvider);
 
     return Scaffold(
       body: SafeArea(

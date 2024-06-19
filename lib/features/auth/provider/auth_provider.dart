@@ -79,16 +79,25 @@ class AuthNotifier extends StateNotifier<AuthState> {
       'acc': acc.toString(),
     });
 
+    String userRole = role == Role.parent ? 'parent' : 'staff';
+    AuthCache.insertString('role', userRole);
+
     state = AuthState.signedIn;
     ctx!.pushReplacementNamed(Routes.homeScreen);
   }
 
-  Future<void> loginParent() async {
+  Future<void> loginUser() async {
     state = AuthState.validating;
-    http.Response response = await HttpAuthUserRepository.loginUser(
-      email,
-      password,
-    );
+    print(role);
+    http.Response response = role == Role.parent
+        ? await HttpAuthUserRepository.loginUser(
+            email,
+            password,
+          )
+        : await HttpAuthUserRepository.loginStaff(
+            email,
+            password,
+          );
 
     print("login response: ${response.body}");
 
@@ -105,7 +114,12 @@ class AuthNotifier extends StateNotifier<AuthState> {
 
     print('token: $token');
 
-    HttpAuthUserRepository.storeUserData(token);
+    String userRole = role == Role.parent ? 'parent' : 'staff';
+    await AuthCache.insertString('role', userRole);
+
+    role == Role.parent
+        ? await HttpAuthUserRepository.storeUserData(token)
+        : await HttpAuthUserRepository.storeStaffData(token);
 
     state = AuthState.signedIn;
     ctx!.pushNamedAndRemoveUntil(

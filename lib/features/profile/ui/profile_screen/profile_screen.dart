@@ -26,6 +26,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     final String email = AuthCache.getCacheData('email')!;
     final String phoneNumber = AuthCache.getCacheData('phone_number')!;
     final screenWidth = MediaQuery.of(context).size.width;
+    final String userRole = AuthCache.getCacheData('role');
 
     return Scaffold(
       body: Container(
@@ -95,21 +96,24 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                       titleText: email,
                       leadingIcon: Icons.email_outlined,
                     ),
-                    const ProfileDivider(),
-                    ProfileTile(
-                      titleText: city,
-                      leadingIcon: Icons.location_on_outlined,
-                    ),
-                    const ProfileDivider(),
-                    const ProfileTile(
-                      titleText: '30205161100779',
-                      leadingIcon: Icons.badge_outlined,
-                    ),
-                    const ProfileDivider(),
-                    ProfileTile(
-                      titleText: phoneNumber,
-                      leadingIcon: Icons.phone_outlined,
-                    ),
+                    if (userRole == 'parent') const ProfileDivider(),
+                    if (userRole == 'parent')
+                      ProfileTile(
+                        titleText: city,
+                        leadingIcon: Icons.location_on_outlined,
+                      ),
+                    if (userRole == 'parent') const ProfileDivider(),
+                    if (userRole == 'parent')
+                      const ProfileTile(
+                        titleText: '30205161100779',
+                        leadingIcon: Icons.badge_outlined,
+                      ),
+                    if (userRole == 'parent') const ProfileDivider(),
+                    if (userRole == 'parent')
+                      ProfileTile(
+                        titleText: phoneNumber,
+                        leadingIcon: Icons.phone_outlined,
+                      ),
                     const ProfileDivider(),
                     ListTile(
                       title: Text(
@@ -137,6 +141,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                       },
                     ),
                     const ProfileDivider(),
+                    if (userRole == 'staff') verticalSpace(250.h),
                     verticalSpace(100.h),
                   ],
                 ),

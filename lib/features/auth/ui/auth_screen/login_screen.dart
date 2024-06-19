@@ -88,7 +88,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   _formKey.currentState!.save();
                   FocusManager.instance.primaryFocus?.unfocus();
                   print('login button pressed');
-                  await authentication.loginParent();
+                  await authentication.loginUser();
                 }
               },
             ),

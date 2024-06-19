@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mobile_app/features/auth/provider/auth_provider.dart';
 
 class AppDropdownMenu extends ConsumerStatefulWidget {
   const AppDropdownMenu({

@@ -26,9 +26,7 @@ class HTTPAuth {
     final url = Uri.https(_urlAddress, path);
 
     print('sent to server');
-
     try {
-
       final response = await http.post(
         url,
         headers: _header,
@@ -37,9 +35,33 @@ class HTTPAuth {
 
       print('server responded');
       return response;
-
     } catch (e) {
+      print('the problem is: $e');
+      final errorMessage = jsonEncode({
+        'error': {'message': 'server timedout, please try again!'}
+      });
 
+      return http.Response(errorMessage, 400);
+    }
+  }
+
+  static Future<http.Response> loginStaff(String json) async {
+    const path = 'staff/login';
+    final url = Uri.https(_urlAddress, path);
+
+    print('sent to server');
+    print(json);
+
+    try {
+      final response = await http.post(
+        url,
+        headers: _header,
+        body: json,
+      );
+
+      print('server responded');
+      return response;
+    } catch (e) {
       print('the problem is: $e');
       final errorMessage = jsonEncode({
         'error': {'message': 'server timedout, please try again!'}
@@ -51,6 +73,17 @@ class HTTPAuth {
 
   static Future<http.Response> getUserData(String token) async {
     const path = 'user';
+    final url = Uri.https(_urlAddress, path);
+    final response = await http.get(
+      url,
+      headers: {'Content-Type': 'application/json', 'Authorization': token},
+    );
+
+    return response;
+  }
+
+  static Future<http.Response> getStaffData(String token) async {
+    const path = 'staff/member';
     final url = Uri.https(_urlAddress, path);
     final response = await http.get(
       url,

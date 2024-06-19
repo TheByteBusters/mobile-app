@@ -52,8 +52,26 @@ class HttpAuthUserRepository {
     return response;
   }
 
+  static Future<http.Response> loginStaff(String email, String password) async {
+    String json = jsonEncode({
+      'email': email,
+      'password': password,
+    });
+    dynamic response = await HTTPAuth.loginStaff(json);
+
+    return response;
+  }
+
   static storeUserData(String token) async {
     http.Response response = await HTTPAuth.getUserData(token);
+    dynamic data = jsonDecode(response.body);
+    print(response.body);
+    AuthCache.insertString('token', token);
+    AuthCache.insertMap(data);
+  }
+
+  static storeStaffData(String token) async {
+    http.Response response = await HTTPAuth.getStaffData(token);
     dynamic data = jsonDecode(response.body);
     print(response.body);
     AuthCache.insertString('token', token);
