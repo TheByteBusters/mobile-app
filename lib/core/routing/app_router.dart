@@ -4,7 +4,6 @@ import 'package:mobile_app/features/auth/ui/auth_screen/auth_screen.dart';
 import 'package:mobile_app/features/auth/ui/get_started/get_started_screen.dart';
 import 'package:mobile_app/features/monitoring/ui/monitoring_screen.dart';
 import 'package:mobile_app/features/onboarding/onboarding_screen.dart';
-import 'package:mobile_app/features/staff_home/ui/staff_home_screen.dart';
 import 'package:mobile_app/features/home/ui/home_screen/home_screen.dart';
 import 'package:mobile_app/features/profile/ui/profile_screen/profile_screen.dart';
 import 'package:mobile_app/features/search/ui/search_request_screen.dart';
@@ -47,10 +46,6 @@ class AppRouter {
       case Routes.profileScreen:
         return MaterialPageRoute(
           builder: (_) => const ProfileScreen(),
-        );
-      case Routes.staffHomeScreen:
-        return MaterialPageRoute(
-          builder: (_) => const StaffHomeScreen(),
         );
 
       default:
