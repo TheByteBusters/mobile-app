@@ -66,19 +66,28 @@ class HomeScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  NavigationButton(
-                    route: '/',
-                    icon: PhosphorIcons.handCoins(),
-                    tapMethod: () {
-                      launchURL(context);
-                    },
-                  ),
+                  role == 'parent'
+                      ? NavigationButton(
+                          route: '/',
+                          icon: PhosphorIcons.handCoins(),
+                          tapMethod: () {
+                            launchURL(context);
+                          },
+                        )
+                      : NavigationButton(
+                          route: '/',
+                          icon: PhosphorIcons.listBullets(),
+                        ),
                   horizontalSpace(20.w),
-                  if (role == 'parent')
-                    const NavigationButton(
-                      route: Routes.monitoringScreen,
-                      icon: Icons.monitor_heart_outlined,
-                    ),
+                  role == 'parent'
+                      ? const NavigationButton(
+                          route: Routes.monitoringScreen,
+                          icon: Icons.monitor_heart_outlined,
+                        )
+                      : NavigationButton(
+                          route: '/',
+                          icon: PhosphorIcons.pulse(),
+                        ),
                   horizontalSpace(20.w),
                   const NavigationButton(
                     route: Routes.profileScreen,
