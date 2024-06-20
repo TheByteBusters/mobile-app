@@ -79,15 +79,12 @@ class HomeScreen extends StatelessWidget {
                           icon: PhosphorIcons.listBullets(),
                         ),
                   horizontalSpace(20.w),
-                  role == 'parent'
-                      ? const NavigationButton(
-                          route: Routes.monitoringScreen,
-                          icon: Icons.monitor_heart_outlined,
-                        )
-                      : NavigationButton(
-                          route: '/',
-                          icon: PhosphorIcons.pulse(),
-                        ),
+                  NavigationButton(
+                    route: role == 'parent'
+                        ? Routes.monitoringScreen
+                        : Routes.incubatorsScreen,
+                    icon: Icons.monitor_heart_outlined,
+                  ),
                   horizontalSpace(20.w),
                   const NavigationButton(
                     route: Routes.profileScreen,

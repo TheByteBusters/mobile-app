@@ -8,4 +8,5 @@ class Routes {
   static const String monitoringScreen =
       '$searchRequestScreen/monitoringScreen';
   static const String profileScreen = '$homeScreen/profile';
+  static const String incubatorsScreen = '$homeScreen/incubatorsScreen';
 }

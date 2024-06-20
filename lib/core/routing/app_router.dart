@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile_app/core/routing/routes.dart';
 import 'package:mobile_app/features/auth/ui/auth_screen/auth_screen.dart';
 import 'package:mobile_app/features/auth/ui/get_started/get_started_screen.dart';
+import 'package:mobile_app/features/incubators_screen/ui/incubators_screen.dart';
 import 'package:mobile_app/features/monitoring/ui/monitoring_screen.dart';
 import 'package:mobile_app/features/onboarding/onboarding_screen.dart';
 import 'package:mobile_app/features/home/ui/home_screen/home_screen.dart';
@@ -47,7 +48,10 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const ProfileScreen(),
         );
-
+      case Routes.incubatorsScreen:
+        return MaterialPageRoute(
+          builder: (_) => const IncubatorsScreen(),
+        );
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
