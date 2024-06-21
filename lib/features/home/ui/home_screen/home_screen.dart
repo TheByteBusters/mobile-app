@@ -43,56 +43,62 @@ class HomeScreen extends StatelessWidget {
                 subtitle: 'We will help you find an incubator',
                 withReturn: false,
               ),
+              verticalSpace(40.h),
               role == 'parent'
-                  ? Expanded(
-                      child: Center(
-                        child: CircleAvatar(
-                          radius: 80.w,
-                          backgroundColor: ColorsManager.mainGreen,
-                          child: InkWell(
-                            onTap: () {
-                              context.pushNamed(Routes.searchRequestScreen);
-                            },
-                            child: PhosphorIcon(
-                              PhosphorIcons.magnifyingGlass(),
-                              size: 100.h,
-                              color: Colors.white,
-                            ),
+                  ? Center(
+                      child: CircleAvatar(
+                        radius: 80.w,
+                        backgroundColor: ColorsManager.mainGreen,
+                        child: InkWell(
+                          onTap: () {
+                            context.pushNamed(Routes.searchRequestScreen);
+                          },
+                          child: PhosphorIcon(
+                            PhosphorIcons.magnifyingGlass(),
+                            size: 100.h,
+                            color: Colors.white,
                           ),
                         ),
                       ),
                     )
-                  : verticalSpace(250.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  role == 'parent'
-                      ? NavigationButton(
-                          route: '/',
-                          icon: PhosphorIcons.handCoins(),
-                          tapMethod: () {
-                            launchURL(context);
-                          },
-                        )
-                      : NavigationButton(
-                          route: '/',
-                          icon: PhosphorIcons.listBullets(),
-                        ),
-                  horizontalSpace(20.w),
-                  NavigationButton(
-                    route: role == 'parent'
-                        ? Routes.monitoringScreen
-                        : Routes.incubatorsScreen,
-                    icon: Icons.monitor_heart_outlined,
-                  ),
-                  horizontalSpace(20.w),
-                  const NavigationButton(
-                    route: Routes.profileScreen,
-                    icon: Icons.account_circle_outlined,
-                  ),
-                ],
+                  : verticalSpace(10.h),
+              verticalSpace(70.h),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    role == 'parent'
+                        ? NavigationButton(
+                            title: 'Donation',
+                            route: '/',
+                            icon: PhosphorIcons.handCoins(),
+                            tapMethod: () {
+                              launchURL(context);
+                            },
+                          )
+                        : NavigationButton(
+                            title: 'Requests',
+                            route: '/',
+                            icon: PhosphorIcons.listBullets(),
+                          ),
+                    verticalSpace(20.h),
+                    NavigationButton(
+                      title: 'Monitoring',
+                      route: role == 'parent'
+                          ? Routes.monitoringScreen
+                          : Routes.incubatorsScreen,
+                      icon: Icons.monitor_heart_outlined,
+                    ),
+                    verticalSpace(20.h),
+                    const NavigationButton(
+                      title: 'Profile',
+                      route: Routes.profileScreen,
+                      icon: Icons.account_circle_outlined,
+                    ),
+                  ],
+                ),
               ),
-              verticalSpace(100.h),
+              verticalSpace(role == 'parent' ? 50.h : 250.h),
             ],
           ),
         ),
