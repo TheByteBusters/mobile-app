@@ -71,6 +71,7 @@ dependencies:
   location: ^6.0.2
   shared_preferences: ^2.2.3
   url_launcher: ^6.3.0
+  web_socket_channel: ^3.0.0
 
 dev_dependencies:
   flutter_test:

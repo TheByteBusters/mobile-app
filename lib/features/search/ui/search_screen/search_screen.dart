@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mobile_app/core/helpers/extensions.dart';
 import 'package:mobile_app/core/helpers/spacing.dart';
+import 'package:mobile_app/core/routing/routes.dart';
 import 'package:mobile_app/core/theming/colors.dart';
 import 'package:mobile_app/core/widgets/green_button.dart';
 import 'package:mobile_app/core/widgets/screen_header.dart';
@@ -88,9 +90,18 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
             verticalSpace(10.h),
             Visibility(
               visible: searchState == SearchState.found,
-              child: const GreenButton(
-                text: 'Proceed',
+              child: GreenButton(
+                text: 'Send Reservation',
                 route: '/',
+                onPressed: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Reservation sent'),
+                    ),
+                  );
+                  context.pushNamedAndRemoveUntil(Routes.homeScreen,
+                      predicate: (route) => false);
+                },
               ),
             )
           ],

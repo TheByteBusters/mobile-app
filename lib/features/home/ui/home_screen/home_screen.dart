@@ -78,7 +78,7 @@ class HomeScreen extends StatelessWidget {
                           )
                         : NavigationButton(
                             title: 'Requests',
-                            route: '/',
+                            route: Routes.reservationScreen,
                             icon: PhosphorIcons.listBullets(),
                           ),
                     verticalSpace(20.h),

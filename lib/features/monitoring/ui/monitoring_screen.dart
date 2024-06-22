@@ -18,7 +18,7 @@ class MonitoringScreen extends ConsumerStatefulWidget {
 class _MonitoringScreenState extends ConsumerState<MonitoringScreen> {
   @override
   Widget build(BuildContext context) {
-    ref.watch(sensorProvider.notifier).connectProker();
+    // ref.watch(sensorProvider.notifier).connectProker();
     Map<String, String>? reading = ref.watch(sensorProvider);
 
     return Scaffold(

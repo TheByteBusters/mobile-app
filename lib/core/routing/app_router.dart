@@ -7,6 +7,7 @@ import 'package:mobile_app/features/monitoring/ui/monitoring_screen.dart';
 import 'package:mobile_app/features/onboarding/onboarding_screen.dart';
 import 'package:mobile_app/features/home/ui/home_screen/home_screen.dart';
 import 'package:mobile_app/features/profile/ui/profile_screen/profile_screen.dart';
+import 'package:mobile_app/features/reservation/ui/reservation_screen.dart';
 import 'package:mobile_app/features/search/ui/search_request_screen.dart';
 import 'package:mobile_app/features/search/ui/search_screen/search_screen.dart';
 
@@ -52,6 +53,11 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const IncubatorsScreen(),
         );
+      case Routes.reservationScreen:
+        return MaterialPageRoute(
+          builder: (_) => const ReservationScreen(),
+        );
+
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

@@ -9,4 +9,5 @@ class Routes {
       '$searchRequestScreen/monitoringScreen';
   static const String profileScreen = '$homeScreen/profile';
   static const String incubatorsScreen = '$homeScreen/incubatorsScreen';
+  static const String reservationScreen = '$homeScreen/serevationScreen';
 }
