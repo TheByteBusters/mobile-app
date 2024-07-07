@@ -1,6 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:mobile_app/core/helpers/extensions.dart';
-import 'package:mobile_app/core/routing/routes.dart';
+import 'package:mobile_app/core/routing/app_router.dart';
 import 'package:mobile_app/core/theming/colors.dart';
 import 'package:mobile_app/core/theming/styles.dart';
 import 'package:mobile_app/features/incubators_screen/model/incubator_model.dart';
@@ -42,7 +42,7 @@ class _IncubatorTileState extends State<IncubatorTile> {
               onTap: widget.incubator.status == 'available'
                   ? null
                   : () {
-                      context.pushNamed(Routes.monitoringScreen);
+                      context.router.push(const MonitoringRoute());
                     },
             ),
           ),

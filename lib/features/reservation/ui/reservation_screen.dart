@@ -1,9 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mobile_app/core/helpers/extensions.dart';
 import 'package:mobile_app/core/helpers/spacing.dart';
 import 'package:mobile_app/core/theming/styles.dart';
 
+@RoutePage()
 class ReservationScreen extends StatefulWidget {
   const ReservationScreen({super.key});
 
@@ -24,7 +25,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
               InkWell(
                 child: const Icon(Icons.arrow_back),
                 onTap: () {
-                  context.pop();
+                  context.router.maybePop();
                 },
               ),
               verticalSpace(30.h),

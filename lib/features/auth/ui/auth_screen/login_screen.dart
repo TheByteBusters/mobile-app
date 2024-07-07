@@ -82,7 +82,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             alignment: AlignmentDirectional.center,
             child: GreenButton(
               text: 'Login',
-              route: '/home',
               onPressed: () async {
                 if (_formKey.currentState!.validate()) {
                   _formKey.currentState!.save();

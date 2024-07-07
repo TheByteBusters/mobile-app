@@ -1,17 +1,17 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:mobile_app/core/helpers/extensions.dart';
 import 'package:mobile_app/core/theming/colors.dart';
 import 'package:mobile_app/core/theming/styles.dart';
 
 class GreenButton extends StatelessWidget {
   final String text;
-  final String route;
+  final PageRouteInfo? route;
   final void Function()? onPressed;
 
   const GreenButton({
     super.key,
     required this.text,
-    required this.route,
+    this.route,
     this.onPressed,
   });
 
@@ -20,7 +20,7 @@ class GreenButton extends StatelessWidget {
     return TextButton(
       onPressed: onPressed ??
           () {
-            context.pushNamed(route);
+            context.router.push(route!);
           },
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all(ColorsManager.mainGreen),
@@ -34,7 +34,6 @@ class GreenButton extends StatelessWidget {
           ),
         ),
       ),
-      
       child: Text(
         text,
         style: TextStyles.h4WhiteSemiBold,

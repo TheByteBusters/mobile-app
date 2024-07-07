@@ -71,11 +71,14 @@ dependencies:
   location: ^6.0.2
   shared_preferences: ^2.2.3
   url_launcher: ^6.3.0
-  web_socket_channel: ^3.0.0
+  web_socket_channel: ^2.4.5
+  auto_route: ^7.2.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  auto_route_generator: ^7.1.1
+  build_runner: ^2.4.4
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

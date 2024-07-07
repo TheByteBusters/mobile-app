@@ -1,12 +1,14 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mobile_app/core/routing/routes.dart';
+import 'package:mobile_app/core/routing/app_router.dart';
 import 'package:mobile_app/core/widgets/green_button.dart';
 import 'package:mobile_app/core/widgets/screen_header.dart';
 import 'package:mobile_app/features/auth/provider/auth_provider.dart';
 import 'package:mobile_app/features/auth/ui/get_started/role_tile.dart';
 
+@RoutePage()
 class GetStartedScreen extends ConsumerStatefulWidget {
   const GetStartedScreen({super.key});
 
@@ -60,7 +62,7 @@ class _GetStartedScreenState extends ConsumerState<GetStartedScreen> {
                 Expanded(child: Container()),
                 const GreenButton(
                   text: 'Continue',
-                  route: Routes.authScreen,
+                  route: AuthRoute(),
                 ),
                 SizedBox(height: 40.h),
               ],

@@ -1,16 +1,16 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile_app/core/cache/auth_cache.dart';
-import 'package:mobile_app/core/helpers/extensions.dart';
 import 'package:mobile_app/core/helpers/spacing.dart';
-import 'package:mobile_app/core/routing/routes.dart';
+import 'package:mobile_app/core/routing/app_router.dart';
 import 'package:mobile_app/core/theming/colors.dart';
 import 'package:mobile_app/core/theming/styles.dart';
 import 'package:mobile_app/features/profile/ui/profile_screen/profile_divider.dart';
 import 'package:mobile_app/features/profile/ui/profile_screen/profile_tile.dart';
 
+@RoutePage()
 class ProfileScreen extends ConsumerStatefulWidget {
   const ProfileScreen({super.key});
 
@@ -58,7 +58,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
               left: 0,
               child: IconButton(
                 onPressed: () {
-                  context.pop();
+                  context.router.maybePop();
                 },
                 icon: const Icon(Icons.arrow_back),
               ),
@@ -134,15 +134,15 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                       onTap: () async {
                         await AuthCache.insertString('token', '');
                         if (context.mounted) {
-                          context.pushNamedAndRemoveUntil(
-                              Routes.getStartedScreen,
+                          context.router.pushAndPopUntil(
+                              const GetStartedRoute(),
                               predicate: (Route<dynamic> route) => false);
                         }
                       },
                     ),
                     const ProfileDivider(),
-                    if (userRole == 'staff') verticalSpace(250.h),
-                    verticalSpace(100.h),
+                    if (userRole == 'staff') verticalSpace(220.h),
+                    verticalSpace(70.h),
                   ],
                 ),
               ),

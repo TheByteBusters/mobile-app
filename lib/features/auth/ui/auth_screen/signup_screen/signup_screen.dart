@@ -174,7 +174,6 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
             alignment: AlignmentDirectional.center,
             child: GreenButton(
               text: 'SignUp',
-              route: '/home',
               onPressed: () {
                 bool formFieldsValidation = _key.currentState!.validate();
                 final dateValidation =
