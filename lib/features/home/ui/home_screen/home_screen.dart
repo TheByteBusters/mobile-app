@@ -1,15 +1,16 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile_app/core/cache/auth_cache.dart';
-import 'package:mobile_app/core/helpers/extensions.dart';
 import 'package:mobile_app/core/helpers/spacing.dart';
-import 'package:mobile_app/core/routing/routes.dart';
+import 'package:mobile_app/core/routing/app_router.dart';
 import 'package:mobile_app/core/theming/colors.dart';
 import 'package:mobile_app/core/widgets/screen_header.dart';
 import 'package:mobile_app/features/home/ui/home_screen/navigation_button.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:url_launcher/url_launcher.dart' as launcher;
 
+@RoutePage()
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -51,7 +52,7 @@ class HomeScreen extends StatelessWidget {
                         backgroundColor: ColorsManager.mainGreen,
                         child: InkWell(
                           onTap: () {
-                            context.pushNamed(Routes.searchRequestScreen);
+                            context.router.push(const SearchRequestRoute());
                           },
                           child: PhosphorIcon(
                             PhosphorIcons.magnifyingGlass(),
@@ -70,7 +71,6 @@ class HomeScreen extends StatelessWidget {
                     role == 'parent'
                         ? NavigationButton(
                             title: 'Donation',
-                            route: '/',
                             icon: PhosphorIcons.handCoins(),
                             tapMethod: () {
                               launchURL(context);
@@ -78,27 +78,27 @@ class HomeScreen extends StatelessWidget {
                           )
                         : NavigationButton(
                             title: 'Requests',
-                            route: '/',
+                            route: const ReservationRoute(),
                             icon: PhosphorIcons.listBullets(),
                           ),
                     verticalSpace(20.h),
                     NavigationButton(
                       title: 'Monitoring',
                       route: role == 'parent'
-                          ? Routes.monitoringScreen
-                          : Routes.incubatorsScreen,
+                          ? const MonitoringRoute()
+                          : const IncubatorsRoute(),
                       icon: Icons.monitor_heart_outlined,
                     ),
                     verticalSpace(20.h),
                     const NavigationButton(
                       title: 'Profile',
-                      route: Routes.profileScreen,
+                      route: ProfileRoute(),
                       icon: Icons.account_circle_outlined,
                     ),
                   ],
                 ),
               ),
-              verticalSpace(role == 'parent' ? 50.h : 250.h),
+              verticalSpace(role == 'parent' ? 50.h : 200.h),
             ],
           ),
         ),

@@ -1,13 +1,13 @@
 import 'dart:io';
-
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mobile_app/core/helpers/extensions.dart';
-import 'package:mobile_app/core/routing/routes.dart';
+import 'package:mobile_app/core/routing/app_router.dart';
 import 'package:mobile_app/core/theming/styles.dart';
 import 'package:mobile_app/core/widgets/green_button.dart';
 import 'package:mobile_app/features/onboarding/widgets/onboarding_banner.dart';
 
+@RoutePage()
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
 
@@ -18,7 +18,7 @@ class OnboardingScreen extends StatelessWidget {
         if (didPop) {
           exit(0);
         }
-        context.pop();
+        context.router.maybePop();
       },
       child: Scaffold(
         body: Padding(
@@ -37,7 +37,7 @@ class OnboardingScreen extends StatelessWidget {
               SizedBox(height: 30.h),
               const GreenButton(
                 text: 'Get Started',
-                route: Routes.getStartedScreen,
+                route: GetStartedRoute(),
               ),
             ],
           ),

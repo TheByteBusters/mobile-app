@@ -1,7 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:mobile_app/core/helpers/extensions.dart';
 import 'package:mobile_app/core/theming/styles.dart';
 
 class ScreenHeader extends StatelessWidget {
@@ -49,7 +49,7 @@ class ScreenHeader extends StatelessWidget {
         children: [
           IconButton(
             onPressed: () {
-              context.pop();
+              context.maybePop();
             },
             icon: const Icon(Icons.arrow_back),
           ),

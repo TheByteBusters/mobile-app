@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,6 +9,7 @@ import 'package:mobile_app/features/monitoring/provider/sensor_provider.dart';
 import 'package:mobile_app/features/monitoring/ui/monitoring_tile.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
+@RoutePage()
 class MonitoringScreen extends ConsumerStatefulWidget {
   const MonitoringScreen({super.key});
 
@@ -18,7 +20,7 @@ class MonitoringScreen extends ConsumerStatefulWidget {
 class _MonitoringScreenState extends ConsumerState<MonitoringScreen> {
   @override
   Widget build(BuildContext context) {
-    ref.watch(sensorProvider.notifier).connectProker();
+    // ref.watch(sensorProvider.notifier).connectProker();
     Map<String, String>? reading = ref.watch(sensorProvider);
 
     return Scaffold(

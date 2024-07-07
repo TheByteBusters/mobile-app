@@ -1,9 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:mobile_app/core/cache/auth_cache.dart';
-import 'package:mobile_app/core/helpers/extensions.dart';
-import 'package:mobile_app/core/routing/routes.dart';
+import 'package:mobile_app/core/routing/app_router.dart';
 import 'package:mobile_app/features/auth/repository/user_repository.dart';
 
 enum AuthState {
@@ -82,8 +82,11 @@ class AuthNotifier extends StateNotifier<AuthState> {
     String userRole = role == Role.parent ? 'parent' : 'staff';
     AuthCache.insertString('role', userRole);
 
+    ctx!.router.pushAndPopUntil(
+      const HomeRoute(),
+      predicate: (Route<dynamic> route) => false,
+    );
     state = AuthState.signedIn;
-    ctx!.pushReplacementNamed(Routes.homeScreen);
   }
 
   Future<void> loginUser() async {
@@ -121,11 +124,11 @@ class AuthNotifier extends StateNotifier<AuthState> {
         ? await HttpAuthUserRepository.storeUserData(token)
         : await HttpAuthUserRepository.storeStaffData(token);
 
-    state = AuthState.signedIn;
-    ctx!.pushNamedAndRemoveUntil(
-      Routes.homeScreen,
+    ctx!.router.pushAndPopUntil(
+      const HomeRoute(),
       predicate: (Route<dynamic> route) => false,
     );
+    state = AuthState.signedIn;
   }
 
   Future<void> checkCache() async {

@@ -1,14 +1,15 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile_app/core/helpers/spacing.dart';
-import 'package:mobile_app/core/routing/routes.dart';
 import 'package:mobile_app/core/theming/styles.dart';
 import 'package:mobile_app/core/widgets/app_dropdown_menu.dart';
 import 'package:mobile_app/core/widgets/green_button.dart';
 import 'package:mobile_app/core/widgets/screen_header.dart';
 import 'package:mobile_app/features/search/providers/search_provider.dart';
 
+@RoutePage()
 class SearchRequestScreen extends ConsumerWidget {
   const SearchRequestScreen({super.key});
 
@@ -90,7 +91,6 @@ class SearchRequestScreen extends ConsumerWidget {
               const Spacer(),
               GreenButton(
                 text: 'Continue',
-                route: Routes.searchingScreen,
                 onPressed: () {
                   search.findHospital(context);
                 },

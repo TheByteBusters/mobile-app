@@ -1,9 +1,9 @@
 import 'dart:convert';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mobile_app/core/helpers/extensions.dart';
-import 'package:mobile_app/core/routing/routes.dart';
+import 'package:mobile_app/core/routing/app_router.dart';
 import 'package:mobile_app/features/search/models/hospital.dart';
 import 'package:mobile_app/features/search/repository/search_repository.dart';
 
@@ -27,7 +27,7 @@ class SearchNotifier extends StateNotifier<SearchState> {
 
   void findHospital(BuildContext context) async {
     state = SearchState.waiting;
-    context.pushNamed(Routes.searchingScreen);
+    context.router.push(const SearchRoute());
     final response = await HttpSearchRepository.getHospital(searchAttempt);
 
     if (!context.mounted) return;
@@ -41,7 +41,7 @@ class SearchNotifier extends StateNotifier<SearchState> {
     } else if (response.statusCode != 200) {
       // in case any thing wrong happens
       state = SearchState.faild;
-      context.pop();
+      context.router.maybePop();
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('Something went wrong! please try again'),
       ));

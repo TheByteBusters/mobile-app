@@ -1,13 +1,16 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile_app/core/helpers/spacing.dart';
+import 'package:mobile_app/core/routing/app_router.dart';
 import 'package:mobile_app/core/theming/colors.dart';
 import 'package:mobile_app/core/widgets/green_button.dart';
 import 'package:mobile_app/core/widgets/screen_header.dart';
 import 'package:mobile_app/features/search/providers/search_provider.dart';
 import 'package:mobile_app/features/search/ui/search_screen/search_result.dart';
 
+@RoutePage()
 class SearchScreen extends ConsumerStatefulWidget {
   const SearchScreen({super.key});
 
@@ -88,9 +91,19 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
             verticalSpace(10.h),
             Visibility(
               visible: searchState == SearchState.found,
-              child: const GreenButton(
-                text: 'Proceed',
-                route: '/',
+              child: GreenButton(
+                text: 'Send Reservation',
+                onPressed: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Reservation sent'),
+                    ),
+                  );
+                  context.router.pushAndPopUntil(
+                    const MainRoute(),
+                    predicate: (route) => false,
+                  );
+                },
               ),
             )
           ],

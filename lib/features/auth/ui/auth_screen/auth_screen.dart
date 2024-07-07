@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,6 +11,7 @@ import 'package:mobile_app/features/auth/provider/auth_provider.dart';
 import 'package:mobile_app/features/auth/ui/auth_screen/login_screen.dart';
 import 'package:mobile_app/features/auth/ui/auth_screen/signup_screen/signup_screen.dart';
 
+@RoutePage()
 class AuthScreen extends ConsumerStatefulWidget {
   const AuthScreen({super.key});
 

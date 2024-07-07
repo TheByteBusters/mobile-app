@@ -1,6 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mobile_app/core/helpers/extensions.dart';
 import 'package:mobile_app/core/helpers/spacing.dart';
 import 'package:mobile_app/core/theming/colors.dart';
 import 'package:mobile_app/core/theming/styles.dart';
@@ -9,13 +9,13 @@ class NavigationButton extends StatelessWidget {
   const NavigationButton({
     super.key,
     required this.icon,
-    required this.route,
+    this.route,
     this.tapMethod,
     required this.title,
   });
 
   final IconData icon;
-  final String route;
+  final PageRouteInfo? route;
   final String title;
   final void Function()? tapMethod;
 
@@ -26,7 +26,7 @@ class NavigationButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(10.w),
         onTap: tapMethod ??
             () {
-              context.pushNamed(route);
+              context.router.push(route!);
             },
         child: Center(
           child: Container(

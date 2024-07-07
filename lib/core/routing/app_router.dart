@@ -1,65 +1,45 @@
-import 'package:flutter/material.dart';
-import 'package:mobile_app/core/routing/routes.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:mobile_app/core/cache/auth_cache.dart';
 import 'package:mobile_app/features/auth/ui/auth_screen/auth_screen.dart';
 import 'package:mobile_app/features/auth/ui/get_started/get_started_screen.dart';
+import 'package:mobile_app/features/home/ui/home_screen/home_screen.dart';
 import 'package:mobile_app/features/incubators_screen/ui/incubators_screen.dart';
+import 'package:mobile_app/features/main_screen/main_screen.dart';
 import 'package:mobile_app/features/monitoring/ui/monitoring_screen.dart';
 import 'package:mobile_app/features/onboarding/onboarding_screen.dart';
-import 'package:mobile_app/features/home/ui/home_screen/home_screen.dart';
 import 'package:mobile_app/features/profile/ui/profile_screen/profile_screen.dart';
+import 'package:mobile_app/features/reservation/ui/reservation_screen.dart';
 import 'package:mobile_app/features/search/ui/search_request_screen.dart';
 import 'package:mobile_app/features/search/ui/search_screen/search_screen.dart';
+part 'app_router.gr.dart';
 
-class AppRouter {
-  Route generateRoute(RouteSettings settings) {
-    // arguments to passe to any screen
-    // final arguments = settings.arguments;
+@AutoRouterConfig()
+class AppRouter extends _$AppRouter {
+  final token = AuthCache.getCacheData('token');
 
-    switch (settings.name) {
-      case Routes.onBoardingScreen:
-        return MaterialPageRoute(
-          builder: (_) => const OnboardingScreen(),
-        );
-      case Routes.authScreen:
-        return MaterialPageRoute(
-          builder: (_) => const AuthScreen(),
-        );
-      case Routes.getStartedScreen:
-        return MaterialPageRoute(
-          builder: (_) => const GetStartedScreen(),
-        );
-      case Routes.homeScreen:
-        return MaterialPageRoute(
-          builder: (_) => const HomeScreen(),
-        );
-      case Routes.searchRequestScreen:
-        return MaterialPageRoute(
-          builder: (_) => const SearchRequestScreen(),
-        );
-      case Routes.searchingScreen:
-        return MaterialPageRoute(
-          builder: (_) => const SearchScreen(),
-        );
-      case Routes.monitoringScreen:
-        return MaterialPageRoute(
-          builder: (_) => const MonitoringScreen(),
-        );
-      case Routes.profileScreen:
-        return MaterialPageRoute(
-          builder: (_) => const ProfileScreen(),
-        );
-      case Routes.incubatorsScreen:
-        return MaterialPageRoute(
-          builder: (_) => const IncubatorsScreen(),
-        );
-      default:
-        return MaterialPageRoute(
-          builder: (_) => Scaffold(
-            body: Center(
-              child: Text('No route defined for ${settings.name}'),
-            ),
-          ),
-        );
-    }
-  }
+  @override
+  List<AutoRoute> get routes => [
+        // add your routes here
+        AutoRoute(
+          page: GetStartedRoute.page,
+          initial: token == null ? true : false,
+        ),
+        AutoRoute(
+          page: AuthRoute.page,
+          initial: token == '' ? true : false,
+        ),
+        AutoRoute(
+          page: MainRoute.page,
+          initial: token != null && token != '' ? true : false,
+          children: [
+            AutoRoute(page: HomeRoute.page),
+            AutoRoute(page: MonitoringRoute.page),
+            AutoRoute(page: ProfileRoute.page),
+          ],
+        ),
+        AutoRoute(page: ReservationRoute.page),
+        AutoRoute(page: SearchRequestRoute.page),
+        AutoRoute(page: SearchRoute.page),
+        AutoRoute(page: IncubatorsRoute.page),
+      ];
 }

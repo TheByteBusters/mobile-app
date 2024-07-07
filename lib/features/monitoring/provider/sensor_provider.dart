@@ -3,11 +3,15 @@ import 'package:mobile_app/core/networking/mqtt.dart';
 import 'package:mqtt_client/mqtt_client.dart';
 
 class SensorNotifier extends StateNotifier<Map<String, String>?> {
-  SensorNotifier() : super(null);
+  SensorNotifier() : super(null) {
+    connectProker();
+  }
   var connected = false;
 
   void connectProker() async {
+    print('trying to connect to mqtt');
     if (connected == false) {
+      print('enter if');
       await MqttNetwork.connect();
       print('done');
       connected = true;
@@ -39,6 +43,8 @@ class SensorNotifier extends StateNotifier<Map<String, String>?> {
     int spoStart = message.indexOf('SPO2') + 5;
     int spoEnd = message.length;
     String spoReading = message.substring(spoStart, spoEnd);
+
+    print(message);
 
     return {
       'heartRate': hrReading,
