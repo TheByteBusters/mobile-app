@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mobile_app/core/helpers/spacing.dart';
 import 'package:mobile_app/core/theming/styles.dart';
 import 'package:mobile_app/features/incubators_screen/provider/incubators_provider.dart';
 import 'package:mobile_app/features/incubators_screen/ui/incubator_tile.dart';
@@ -33,16 +34,7 @@ class _IncubatorsScreenState extends ConsumerState {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              IconButton(
-                onPressed: () {
-                  context.router.maybePop();
-                },
-                padding: const EdgeInsets.fromLTRB(0, 8, 8, 8),
-                icon: const Icon(
-                  Icons.arrow_back,
-                  color: Colors.black,
-                ),
-              ),
+              verticalSpace(16.h),
               Padding(
                 padding: const EdgeInsets.only(left: 8.0, bottom: 24),
                 child: Text(

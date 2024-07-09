@@ -54,18 +54,9 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 height: 250.h,
               ),
             ),
-            Positioned(
-              left: 0,
-              child: IconButton(
-                onPressed: () {
-                  context.router.maybePop();
-                },
-                icon: const Icon(Icons.arrow_back),
-              ),
-            ),
             Column(
               children: [
-                verticalSpace(80.h),
+                verticalSpace(50.h),
                 SizedBox(
                   width: double.infinity,
                   child: Icon(
@@ -91,7 +82,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 ),
                 child: Column(
                   children: [
-                    verticalSpace(80.h),
+                    verticalSpace(40.h),
                     ProfileTile(
                       titleText: email,
                       leadingIcon: Icons.email_outlined,
@@ -141,8 +132,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                       },
                     ),
                     const ProfileDivider(),
-                    if (userRole == 'staff') verticalSpace(220.h),
-                    verticalSpace(70.h),
+                    if (userRole == 'staff') verticalSpace(250.h),
+                    verticalSpace(16.h),
                   ],
                 ),
               ),

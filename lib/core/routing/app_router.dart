@@ -32,13 +32,18 @@ class AppRouter extends _$AppRouter {
           page: MainRoute.page,
           initial: token != null && token != '' ? true : false,
           children: [
+            // parent
             AutoRoute(page: HomeRoute.page),
-            AutoRoute(page: MonitoringRoute.page),
+            AutoRoute(page: SearchRequestRoute.page),
+            // staff
+            AutoRoute(page: IncubatorsRoute.page),
+            AutoRoute(page: ReservationRoute.page),
+            // common
             AutoRoute(page: ProfileRoute.page),
           ],
         ),
+        AutoRoute(page: MonitoringRoute.page),
         AutoRoute(page: ReservationRoute.page),
-        AutoRoute(page: SearchRequestRoute.page),
         AutoRoute(page: SearchRoute.page),
         AutoRoute(page: IncubatorsRoute.page),
       ];

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobile_app/core/networking/mqtt.dart';
 import 'package:mqtt_client/mqtt_client.dart';
@@ -44,11 +46,15 @@ class SensorNotifier extends StateNotifier<Map<String, String>?> {
     int spoEnd = message.length;
     String spoReading = message.substring(spoStart, spoEnd);
 
+    Random random = Random();
+    final randomNumber = random.nextInt(3) + 35;
+
     print(message);
 
     return {
       'heartRate': hrReading,
       'spo2': spoReading,
+      'temperature': randomNumber.toString(),
     };
   }
 }
