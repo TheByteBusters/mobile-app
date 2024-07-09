@@ -22,13 +22,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              InkWell(
-                child: const Icon(Icons.arrow_back),
-                onTap: () {
-                  context.router.maybePop();
-                },
-              ),
-              verticalSpace(30.h),
+              verticalSpace(16.h),
               Text(
                 'Requests',
                 style: TextStyles.h1BlackBold,

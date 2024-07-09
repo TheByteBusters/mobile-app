@@ -6,7 +6,7 @@ import 'package:mobile_app/core/helpers/spacing.dart';
 import 'package:mobile_app/core/theming/colors.dart';
 import 'package:mobile_app/core/theming/styles.dart';
 import 'package:mobile_app/features/home/ui/home_screen/app_banner.dart';
-import 'package:mobile_app/features/home/ui/home_screen/biometric_card.dart';
+import 'package:mobile_app/features/home/ui/home_screen/biometrics_list/biometrics_list.dart';
 import 'package:url_launcher/url_launcher.dart' as launcher;
 
 @RoutePage()
@@ -39,50 +39,48 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Hello, $name',
-              style: TextStyles.h1BlackBold,
-            ),
-            Text(
-              'Because every life is precious',
-              style: TextStyles.h4BlackNormal,
-            ),
-            verticalSpace(10),
-            AppBanner(
-              title: 'donate!',
-              withSmallerTitle: false,
-              firstLine: 'Your donation to the Egyptian Shifa Bank',
-              secondLine: 'saves newbons from death',
-              image: 'assets/images/baby.png',
-              onPressed: () {
-                launchURL(context);
-              },
-              withIcon: true,
-            ),
-            verticalSpace(16),
-            Container(
-              height: 110,
+            Expanded(
               child: ListView(
-                scrollDirection: Axis.horizontal,
                 children: [
-                  BiometricCard(),
-                  horizontalSpace(6),
-                  BiometricCard(),
-                  horizontalSpace(6),
-                  BiometricCard(),
+                  Text(
+                    'Hello, $name',
+                    style: TextStyles.h1BlackBold,
+                  ),
+                  Text(
+                    'Because every life is precious',
+                    style: TextStyles.h4BlackNormal,
+                  ),
+                  verticalSpace(10),
+                  AppBanner(
+                    title: 'donate!',
+                    withSmallerTitle: false,
+                    firstLine: 'Your donation to the Egyptian Shifa Bank',
+                    secondLine: 'saves newbons from death',
+                    image: 'assets/images/baby.png',
+                    onPressed: () {
+                      launchURL(context);
+                    },
+                    withIcon: true,
+                  ),
+                  verticalSpace(16),
+                  const SizedBox(
+                    height: 110,
+                    child: BiometricsList(),
+                  ),
+                  verticalSpace(16.h),
+                  const AppBanner(
+                    title: 'Damietta Military Hospital',
+                    withSmallerTitle: true,
+                    firstLine:
+                        'New Damietta City, الحي الثاني - المجاورة الثانية',
+                    secondLine: 'Rd, Kafr Saad, Damietta Governorate',
+                    withIcon: false,
+                    image: 'assets/images/damietta_hospital.jpg',
+                  ),
                 ],
               ),
             ),
-            verticalSpace(16.h),
-            const AppBanner(
-              title: 'Damietta Military Hospital',
-              withSmallerTitle: true,
-              firstLine: 'New Damietta City, الحي الثاني - المجاورة الثانية',
-              secondLine: 'Rd, Kafr Saad, Damietta Governorate',
-              withIcon: false,
-              image: 'assets/images/damietta_hospital.jpg',
-            ),
-            verticalSpace(32.h),
+            verticalSpace(6.h),
             Row(
               children: [
                 Container(
@@ -102,33 +100,35 @@ class HomeScreen extends StatelessWidget {
             ),
             verticalSpace(16.h),
             Container(
-              padding: EdgeInsets.symmetric(vertical: 30.h, horizontal: 10.w),
+              padding: EdgeInsets.all(16.w),
               width: double.infinity,
               height: 100.h,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: Colors.grey,
               ),
-              child: Row(
-                children: [
-                  Text(
-                    'There are no requests yet',
-                    style: TextStyles.h4WhiteSemiBold,
-                    textAlign: TextAlign.justify,
-                  ),
-                  const Spacer(),
-                  const CircleAvatar(
-                    backgroundColor: Colors.white,
-                    radius: 16,
-                    child: Icon(
-                      Icons.warning_amber_rounded,
-                      color: Colors.grey,
+              child: Center(
+                child: Row(
+                  children: [
+                    Text(
+                      'There are no requests yet',
+                      style: TextStyles.h4WhiteSemiBold,
+                      textAlign: TextAlign.justify,
                     ),
-                  ),
-                  horizontalSpace(16.w),
-                ],
+                    const Spacer(),
+                    const CircleAvatar(
+                      backgroundColor: Colors.white,
+                      radius: 16,
+                      child: Icon(
+                        Icons.warning_amber_rounded,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            )
+            ),
+            verticalSpace(16.h),
           ],
         ),
       ),

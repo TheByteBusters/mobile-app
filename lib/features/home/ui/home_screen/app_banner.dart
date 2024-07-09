@@ -28,7 +28,7 @@ class AppBanner extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed ?? () {},
       child: Container(
-        height: 120,
+        height: 250,
         width: double.infinity,
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -40,7 +40,7 @@ class AppBanner extends StatelessWidget {
                 borderRadius: const BorderRadius.all(Radius.circular(10)),
                 image: DecorationImage(
                   image: ExactAssetImage(image),
-                  fit: BoxFit.fitWidth,
+                  fit: BoxFit.cover,
                 ),
               ),
               width: double.infinity,
@@ -53,11 +53,11 @@ class AppBanner extends StatelessWidget {
                   begin: Alignment.topRight,
                   end: Alignment.bottomLeft,
                   colors: <Color>[
-                    ColorsManager.mainGreen.withOpacity(0.6),
+                    ColorsManager.mainGreen.withOpacity(0.5),
                     Colors.black.withOpacity(0.2),
                   ],
                   stops: const [
-                    0.5,
+                    0.4,
                     1,
                   ],
                 ),

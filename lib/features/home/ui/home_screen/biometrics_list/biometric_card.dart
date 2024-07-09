@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mobile_app/core/helpers/spacing.dart';
 import 'package:mobile_app/core/theming/colors.dart';
 import 'package:mobile_app/core/theming/styles.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
@@ -8,7 +7,16 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 class BiometricCard extends StatelessWidget {
   const BiometricCard({
     super.key,
+    required this.title,
+    required this.reading,
+    required this.label,
+    required this.icon,
   });
+
+  final String title;
+  final String reading;
+  final String label;
+  final IconData icon;
 
   @override
   Widget build(BuildContext context) {
@@ -24,23 +32,22 @@ class BiometricCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Text(
-                'Heart Rate',
-                style: TextStyle(
+              Text(
+                title,
+                style: const TextStyle(
                   color: Colors.white,
                 ),
               ),
               const Spacer(),
               PhosphorIcon(
-                PhosphorIcons.heartbeat(),
+                icon,
                 color: Colors.white,
                 size: 34.h,
               ),
             ],
           ),
-          verticalSpace(4.h),
           Text(
-            '74',
+            reading,
             style: TextStyles.h1BlackBold.copyWith(
               color: Colors.white,
               fontWeight: FontWeight.bold,
@@ -49,10 +56,10 @@ class BiometricCard extends StatelessWidget {
               applyHeightToLastDescent: false,
             ),
           ),
-          const Text(
-            'BPM',
-            style: TextStyle(color: ColorsManager.gray),
-            textHeightBehavior: TextHeightBehavior(
+          Text(
+            label,
+            style: const TextStyle(color: ColorsManager.gray),
+            textHeightBehavior: const TextHeightBehavior(
               applyHeightToFirstAscent: false,
             ),
           ),

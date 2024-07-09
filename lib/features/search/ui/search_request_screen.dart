@@ -6,7 +6,6 @@ import 'package:mobile_app/core/helpers/spacing.dart';
 import 'package:mobile_app/core/theming/styles.dart';
 import 'package:mobile_app/core/widgets/app_dropdown_menu.dart';
 import 'package:mobile_app/core/widgets/green_button.dart';
-import 'package:mobile_app/core/widgets/screen_header.dart';
 import 'package:mobile_app/features/search/providers/search_provider.dart';
 
 @RoutePage()
@@ -23,17 +22,16 @@ class SearchRequestScreen extends ConsumerWidget {
           padding: EdgeInsets.symmetric(horizontal: 15.w),
           child: Column(
             children: [
-              const ScreenHeader(
-                title: 'Get ready for search!',
-                subtitle: 'choose what suites you',
-                withReturn: true,
+              verticalSpace(16.h),
+              Text(
+                'Looking for Incubator!',
+                style: TextStyles.h1BlackBold,
+                textAlign: TextAlign.center,
               ),
               verticalSpace(36.h),
               Container(
-                height: 300.h,
                 padding: EdgeInsets.all(5.w),
                 child: Column(
-                  mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
@@ -95,7 +93,7 @@ class SearchRequestScreen extends ConsumerWidget {
                   search.findHospital(context);
                 },
               ),
-              verticalSpace(105.h)
+              verticalSpace(60.h)
             ],
           ),
         ),
