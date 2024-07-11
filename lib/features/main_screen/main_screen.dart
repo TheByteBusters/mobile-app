@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mobile_app/core/cache/auth_cache.dart';
 import 'package:mobile_app/core/helpers/spacing.dart';
+import 'package:mobile_app/core/networking/websocket_reservation.dart';
 import 'package:mobile_app/core/routing/app_router.dart';
 import 'package:mobile_app/core/theming/colors.dart';
 import 'package:mobile_app/core/theming/styles.dart';
@@ -11,9 +12,9 @@ import 'package:mobile_app/core/theming/styles.dart';
 @RoutePage()
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
+    WebSocketReservation.authUser();
     final role = AuthCache.getCacheData('role');
 
     return AutoTabsRouter(

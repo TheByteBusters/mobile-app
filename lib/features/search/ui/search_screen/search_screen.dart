@@ -5,8 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile_app/core/helpers/spacing.dart';
 import 'package:mobile_app/core/routing/app_router.dart';
 import 'package:mobile_app/core/theming/colors.dart';
+import 'package:mobile_app/core/theming/styles.dart';
 import 'package:mobile_app/core/widgets/green_button.dart';
-import 'package:mobile_app/core/widgets/screen_header.dart';
 import 'package:mobile_app/features/search/providers/search_provider.dart';
 import 'package:mobile_app/features/search/ui/search_screen/search_result.dart';
 
@@ -25,17 +25,15 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
     final searchState = ref.watch(searchProvider);
     final search = ref.watch(searchProvider.notifier);
 
-    Widget header = const ScreenHeader(
-      title: 'Searching...',
-      subtitle: 'Looking for an incubator for your baby',
-      withLogo: false,
+    Widget header = Text(
+      'Searching...',
+      style: TextStyles.h1BlackBold,
     );
 
     if (searchState == SearchState.found) {
-      header = const ScreenHeader(
-        title: 'We found one for your!',
-        subtitle: 'If it does not fit search again',
-        withLogo: false,
+      header = Text(
+        'We found one for your!',
+        style: TextStyles.h1BlackBold,
       );
     }
 
@@ -49,9 +47,10 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
       body: SafeArea(
         child: Column(
           children: [
+            verticalSpace(16.h),
             header,
             Container(
-              margin: EdgeInsets.all(30.w),
+              margin: EdgeInsets.symmetric(horizontal: 30.w, vertical: 16.h),
               width: double.infinity,
               height: 550.h,
               decoration: ShapeDecoration(
@@ -94,14 +93,8 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
               child: GreenButton(
                 text: 'Send Reservation',
                 onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Reservation sent'),
-                    ),
-                  );
-                  context.router.pushAndPopUntil(
-                    const MainRoute(),
-                    predicate: (route) => false,
+                  context.router.push(
+                    const ReservationFormRoute(),
                   );
                 },
               ),

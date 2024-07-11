@@ -42,9 +42,11 @@ class SearchNotifier extends StateNotifier<SearchState> {
       // in case any thing wrong happens
       state = SearchState.faild;
       context.router.maybePop();
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text('Something went wrong! please try again'),
-      ));
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Something went wrong! please try again'),
+        ),
+      );
       searchAttempt = 0;
       return;
     }

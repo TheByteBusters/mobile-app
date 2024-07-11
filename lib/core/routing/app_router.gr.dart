@@ -63,10 +63,22 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const ProfileScreen(),
       );
     },
+    ReservationFormRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ReservationFormScreen(),
+      );
+    },
     ReservationRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const ReservationScreen(),
+      );
+    },
+    SearchNavigationRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const SearchNavigationScreen(),
       );
     },
     SearchRequestRoute.name: (routeData) {
@@ -197,6 +209,20 @@ class ProfileRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [ReservationFormScreen]
+class ReservationFormRoute extends PageRouteInfo<void> {
+  const ReservationFormRoute({List<PageRouteInfo>? children})
+      : super(
+          ReservationFormRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ReservationFormRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [ReservationScreen]
 class ReservationRoute extends PageRouteInfo<void> {
   const ReservationRoute({List<PageRouteInfo>? children})
@@ -206,6 +232,20 @@ class ReservationRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'ReservationRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [SearchNavigationScreen]
+class SearchNavigationRoute extends PageRouteInfo<void> {
+  const SearchNavigationRoute({List<PageRouteInfo>? children})
+      : super(
+          SearchNavigationRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SearchNavigationRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

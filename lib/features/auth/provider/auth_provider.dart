@@ -107,9 +107,11 @@ class AuthNotifier extends StateNotifier<AuthState> {
     if (response.statusCode != 200) {
       print('not valid babe');
       state = AuthState.invalid;
-      ScaffoldMessenger.of(ctx!).showSnackBar(SnackBar(
-        content: Text(HttpAuthUserRepository.getErrorMessage(response)),
-      ));
+      ScaffoldMessenger.of(ctx!).showSnackBar(
+        SnackBar(
+          content: Text(HttpAuthUserRepository.getErrorMessage(response)),
+        ),
+      );
       return;
     }
 

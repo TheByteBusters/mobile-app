@@ -1,20 +1,29 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mobile_app/core/cache/auth_cache.dart';
 import 'package:mobile_app/core/helpers/spacing.dart';
+import 'package:mobile_app/core/networking/websocket_reservation.dart';
 import 'package:mobile_app/core/theming/styles.dart';
+import 'package:mobile_app/features/reservation/provider/reservations_provider.dart';
 
 @RoutePage()
-class ReservationScreen extends StatefulWidget {
+class ReservationScreen extends ConsumerStatefulWidget {
   const ReservationScreen({super.key});
 
   @override
-  State<ReservationScreen> createState() => _ReservationScreenState();
+  ConsumerState<ReservationScreen> createState() => _ReservationScreenState();
 }
 
-class _ReservationScreenState extends State<ReservationScreen> {
+class _ReservationScreenState extends ConsumerState<ReservationScreen> {
   @override
   Widget build(BuildContext context) {
+    final reservations = ref.watch(reservationsProvider);
+    final reservationsNotifier = ref.watch(reservationsProvider.notifier);
+
+    reservationsNotifier.listenToReservations();
+
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -28,28 +37,12 @@ class _ReservationScreenState extends State<ReservationScreen> {
                 style: TextStyles.h1BlackBold,
               ),
               verticalSpace(50.h),
-              Container(
-                width: double.infinity,
-                padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 1.h),
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(Radius.circular(8)),
-                  border: Border.all(
-                    color: Colors.black,
-                    width: 1.2,
-                  ),
-                ),
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 12.h),
-                      child: Text(
-                        'Request 1',
-                        style: TextStyles.bigTileTitle,
-                      ),
-                    ),
-                    const Spacer(),
-                    const Icon(Icons.error_outline),
-                  ],
+              Expanded(
+                child: ListView.builder(
+                  itemCount: reservations.length,
+                  itemBuilder: ((context, index) {
+                    return Text(reservations[index].babyName);
+                  }),
                 ),
               ),
             ],
