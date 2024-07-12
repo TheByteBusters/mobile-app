@@ -16,6 +16,7 @@ class App extends StatelessWidget {
       minTextAdapt: true,
       child: MaterialApp.router(
         title: 'App',
+        
         theme: ThemeData(
           primaryColor: ColorsManager.mainGreen,
           scaffoldBackgroundColor: Colors.white,

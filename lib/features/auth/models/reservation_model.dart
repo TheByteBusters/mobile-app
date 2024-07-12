@@ -22,17 +22,17 @@ class ReservationModel {
   final String birthDoctorPhone;
   final num hospitalId;
 
-  factory ReservationModel.fromJson(json) {
+factory ReservationModel.fromJson(json) {
     return ReservationModel(
       status: json["status"],
-      babyName: json["babyName"],
-      babyWeight: json["babyWeight"],
-      babyAge: json["babyAge"],
-      babyGender: json["babyGender"],
-      birthHospital: json["birthHospital"],
-      birthDoctorName: json["birthDoctorName"],
-      birthDoctorPhone: json["birthDoctorPhone"],
-      hospitalId: json["hospitalId"],
+      babyName: json["baby_name"],
+      babyWeight: json["baby_weight"],
+      babyAge: json["baby_age"],
+      babyGender: json["baby_gender"],
+      birthHospital: json["birth_hospital"],
+      birthDoctorName: json["birth_doctor_name"],
+      birthDoctorPhone: json["birth_doctor_phone"],
+      hospitalId: json["hospital_id"],
     );
   }
 

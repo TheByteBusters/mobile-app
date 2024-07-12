@@ -93,14 +93,29 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
               child: GreenButton(
                 text: 'Send Reservation',
                 onPressed: () {
+                  search.searchAttempt = 0;
                   context.router.push(
                     const ReservationFormRoute(),
                   );
                 },
               ),
-            )
+              // OutlinedButton(
+              //   // style: ButtonStyle(shape: Outlined),
+              //   child: const Text(
+              //     'another hospital',
+              //     style: TextStyle(
+              //       color: ColorsManager.gray,
+              //     ),
+              //   ),
+              //   onPressed: () {
+              //     search.searchAttempt++;
+              //   },
+              // ),
+              // ],
+            ),
           ],
         ),
+        // ),
       ),
     );
   }

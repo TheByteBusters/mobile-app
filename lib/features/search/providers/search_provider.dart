@@ -32,8 +32,6 @@ class SearchNotifier extends StateNotifier<SearchState> {
 
     if (!context.mounted) return;
 
-    searchAttempt++;
-
     if (response.statusCode == 204) {
       // in case of no hospitals found
       state = SearchState.notFound;

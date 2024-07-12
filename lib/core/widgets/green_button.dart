@@ -8,7 +8,7 @@ class GreenButton extends StatelessWidget {
   final PageRouteInfo? route;
   final void Function()? onPressed;
 
-  const GreenButton({
+const GreenButton({
     super.key,
     required this.text,
     this.route,

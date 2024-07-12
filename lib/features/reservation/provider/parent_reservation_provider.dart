@@ -15,7 +15,7 @@ enum ReservationState {
 class ParentRequestProvider extends StateNotifier<ReservationState> {
   ParentRequestProvider() : super(ReservationState.gettingInput);
   String status = 'pending';
-  String babyName = 'nameTest1';
+  String babyName = 'nameTest2';
   String birthHospital = "hospitalNameTest1";
   String birthDoctorName = "doctorNameTest1";
   String birthDoctorPhone = "01012345678";
