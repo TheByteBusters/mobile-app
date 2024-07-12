@@ -48,18 +48,21 @@ class _IncubatorsScreenState extends ConsumerState {
                           horizontal: 180.w, vertical: 220.h),
                       child: const CircularProgressIndicator())
                   : Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 8),
-                        child: ListView.builder(
-                          itemCount: incubators!.length,
-                          itemBuilder: (context, index) {
-                            return IncubatorTile(
-                              incubator: incubators[index],
-                            );
-                          },
-                        ),
+                      // child: Padding(
+                      //   padding: const EdgeInsets.only(left: 8),
+                      child: ListView.builder(
+                        itemCount: incubators!.length,
+                        itemBuilder: (context, index) {
+                          return
+                              // Text('hi');
+                              IncubatorTile(
+                            incubator: incubators[index],
+                          );
+                        },
                       ),
+                      // ),
                     ),
+              // Text('Hi')
             ],
           ),
         ),

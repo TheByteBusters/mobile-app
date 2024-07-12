@@ -15,7 +15,7 @@ class IncubatorsNotifier extends StateNotifier<IncubatorsState> {
     getIncubators();
   }
 
-  List<Incubator>? incubators;
+  List<Incubator> incubators = [];
 
   Future<void> getIncubators() async {
     state = IncubatorsState.waiting;
@@ -29,13 +29,15 @@ class IncubatorsNotifier extends StateNotifier<IncubatorsState> {
 
     incubators = IncubatorsRepository.parseResponse(response.body);
 
-    if (incubators!.isEmpty) {
+    if (incubators.isEmpty) {
       state = IncubatorsState.empty;
     } else {
       state = IncubatorsState.received;
     }
 
-    print(incubators);
+    print('====================');
+    print('incubators: $incubators');
+    print('===============');
   }
 }
 
