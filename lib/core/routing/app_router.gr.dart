@@ -63,6 +63,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const ProfileScreen(),
       );
     },
+    ReservationDetailsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ReservationDetailsScreen(),
+      );
+    },
     ReservationFormRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -204,6 +210,20 @@ class ProfileRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'ProfileRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ReservationDetailsScreen]
+class ReservationDetailsRoute extends PageRouteInfo<void> {
+  const ReservationDetailsRoute({List<PageRouteInfo>? children})
+      : super(
+          ReservationDetailsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ReservationDetailsRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

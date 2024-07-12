@@ -26,6 +26,7 @@ class ParentRequestProvider extends StateNotifier<ReservationState> {
 
   void sendReservation(BuildContext context) async {
     final reservation = ReservationModel(
+      id: 0,
       status: status,
       babyName: babyName,
       babyWeight: babyWeight,

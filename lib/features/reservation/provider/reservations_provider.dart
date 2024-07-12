@@ -12,7 +12,21 @@ enum ReservationsListState {
 }
 
 class ReservationsNotifier extends StateNotifier<List<ReservationModel>> {
-  ReservationsNotifier() : super([]) {
+  ReservationsNotifier()
+      : super([
+          const ReservationModel(
+            id: 0,
+            babyGender: 'test',
+            babyAge: 5,
+            status: 'pending',
+            babyName: 'ziad',
+            babyWeight: 8,
+            birthHospital: 'Alaasar',
+            birthDoctorName: 'doctor',
+            birthDoctorPhone: '01060719095',
+            hospitalId: 7,
+          )
+        ]) {
     loadReservations();
     listenToReservations();
   }

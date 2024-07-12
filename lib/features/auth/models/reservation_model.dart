@@ -1,7 +1,7 @@
 class ReservationModel {
-  const ReservationModel(
-  {
-    required this.babyGender, 
+  const ReservationModel({
+    required this.id,
+    required this.babyGender,
     required this.babyAge,
     required this.status,
     required this.babyName,
@@ -12,6 +12,7 @@ class ReservationModel {
     required this.hospitalId,
   });
 
+  final num id;
   final String status;
   final String babyName;
   final num babyWeight;
@@ -22,8 +23,9 @@ class ReservationModel {
   final String birthDoctorPhone;
   final num hospitalId;
 
-factory ReservationModel.fromJson(json) {
+  factory ReservationModel.fromJson(json) {
     return ReservationModel(
+      id: json["id"],
       status: json["status"],
       babyName: json["baby_name"],
       babyWeight: json["baby_weight"],

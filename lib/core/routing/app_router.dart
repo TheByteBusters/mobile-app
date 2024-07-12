@@ -9,7 +9,8 @@ import 'package:mobile_app/features/main_screen/main_screen.dart';
 import 'package:mobile_app/features/monitoring/ui/monitoring_screen.dart';
 import 'package:mobile_app/features/onboarding/onboarding_screen.dart';
 import 'package:mobile_app/features/profile/ui/profile_screen/profile_screen.dart';
-import 'package:mobile_app/features/reservation/ui/reservation_screen.dart';
+import 'package:mobile_app/features/reservation/ui/reservation_screen/reservation_details_screen.dart';
+import 'package:mobile_app/features/reservation/ui/reservations_screen/reservations_screen.dart';
 import 'package:mobile_app/features/reservation/ui/reservation_form_screen.dart';
 import 'package:mobile_app/features/search/ui/search_request_screen.dart';
 import 'package:mobile_app/features/search/ui/search_screen/search_screen.dart';
@@ -45,14 +46,14 @@ class AppRouter extends _$AppRouter {
               ],
             ),
             // staff
-            AutoRoute(page: IncubatorsRoute.page),
             AutoRoute(page: ReservationRoute.page),
+            AutoRoute(page: ReservationDetailsRoute.page),
+            AutoRoute(page: IncubatorsRoute.page),
             // common
             AutoRoute(page: ProfileRoute.page),
           ],
         ),
         AutoRoute(page: MonitoringRoute.page),
-        AutoRoute(page: ReservationRoute.page),
         AutoRoute(page: SearchRoute.page),
         AutoRoute(page: IncubatorsRoute.page),
       ];

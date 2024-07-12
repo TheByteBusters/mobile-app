@@ -22,32 +22,30 @@ class _IncubatorTileState extends State<IncubatorTile> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Expanded(
-          child: Container(
-            margin: const EdgeInsets.only(bottom: 16),
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: widget.incubator.status == 'reserved'
-                    ? ColorsManager.mainGreen
-                    : ColorsManager.gray.withOpacity(0.8),
-                width: 2,
-              ),
-              borderRadius: BorderRadius.circular(10),
+        Container(
+          margin: const EdgeInsets.only(bottom: 16),
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: widget.incubator.status == 'reserved'
+                  ? ColorsManager.mainGreen
+                  : ColorsManager.gray.withOpacity(0.8),
+              width: 2,
             ),
-            child: ListTile(
-              title: Text(
-                widget.incubator.name,
-                style: TextStyles.bigTileTitle,
-              ),
-              onTap: widget.incubator.status == 'available'
-                  ? null
-                  : () {
-                      context.router.push(const MonitoringRoute());
-                    },
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: ListTile(
+            title: Text(
+              widget.incubator.name,
+              style: TextStyles.bigTileTitle,
             ),
+            onTap: widget.incubator.status == 'available'
+                ? null
+                : () {
+                    context.router.push(const MonitoringRoute());
+                  },
           ),
         ),
-        Padding(
+          Padding(
           padding: const EdgeInsets.only(left: 15, bottom: 20),
           child: Switch(
             value: widget.incubator.status == 'reserved',
