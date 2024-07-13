@@ -16,6 +16,7 @@ class InformationField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
@@ -25,14 +26,14 @@ class InformationField extends StatelessWidget {
         verticalSpace(12.h),
         Container(
           margin: const EdgeInsets.only(bottom: 16),
-          padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.h),
+          padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 12.h),
           width: double.infinity,
           decoration: BoxDecoration(
             border: Border.all(
               color: Colors.black,
               width: 1,
             ),
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(6),
           ),
           child: Text(
             text,

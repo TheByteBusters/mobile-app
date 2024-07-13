@@ -1,22 +1,28 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile_app/core/routing/app_router.dart';
 import 'package:mobile_app/features/auth/models/reservation_model.dart';
+import 'package:mobile_app/features/reservation/provider/reservations_provider.dart';
 
-class ReservationTile extends StatelessWidget {
+class ReservationTile extends ConsumerWidget {
   const ReservationTile({
     super.key,
     required this.reservation,
+    required this.index,
   });
 
   final ReservationModel reservation;
+  final int index;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final reservationsNotifier = ref.watch(reservationsProvider.notifier);
     return InkWell(
       borderRadius: const BorderRadius.all(Radius.circular(5)),
       onTap: () {
+        reservationsNotifier.detailsIndex = index;
         context.router.push(const ReservationDetailsRoute());
       },
       child: Container(

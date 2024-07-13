@@ -32,7 +32,7 @@ class _ReservationScreenState extends ConsumerState<ReservationScreen> {
             children: [
               verticalSpace(16.h),
               Text(
-                'Requests',
+                'Reservations',
                 style: TextStyles.h1BlackBold,
               ),
               verticalSpace(30.h),
@@ -41,7 +41,10 @@ class _ReservationScreenState extends ConsumerState<ReservationScreen> {
                   itemCount: reservations.length,
                   itemBuilder: ((context, index) {
                     print("indside list$reservations");
-                    return ReservationTile(reservation: reservations[index]);
+                    return ReservationTile(
+                      reservation: reservations[index],
+                      index: index,
+                    );
                   }),
                 ),
               ),

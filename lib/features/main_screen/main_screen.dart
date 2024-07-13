@@ -23,6 +23,7 @@ class MainScreen extends StatelessWidget {
         role == 'parent'
             ? const SearchRequestRoute()
             : const ReservationRoute(),
+        // const ReservationDetailsRoute(),
         const ProfileRoute(),
       ],
       builder: (context, child) {

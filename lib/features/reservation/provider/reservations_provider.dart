@@ -16,13 +16,13 @@ class ReservationsNotifier extends StateNotifier<List<ReservationModel>> {
       : super([
           const ReservationModel(
             id: 0,
-            babyGender: 'test',
+            babyGender: 'male',
             babyAge: 5,
             status: 'pending',
             babyName: 'ziad',
             babyWeight: 8,
             birthHospital: 'Alaasar',
-            birthDoctorName: 'doctor',
+            birthDoctorName: 'the doctor',
             birthDoctorPhone: '01060719095',
             hospitalId: 7,
           )
@@ -31,6 +31,7 @@ class ReservationsNotifier extends StateNotifier<List<ReservationModel>> {
     listenToReservations();
   }
 
+  var detailsIndex = 0;
   final listState = ReservationsListState.init;
 
   void listenToReservations() {
