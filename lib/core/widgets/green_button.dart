@@ -32,7 +32,7 @@ class GreenButton extends StatelessWidget {
             MaterialStateProperty.all(color ?? ColorsManager.mainGreen),
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         minimumSize: MaterialStateProperty.all(
-          smaller == true ? Size(200.w, 60.h) : Size(190.w, 60.h),
+          smaller == true ? Size(190.w, 60.h) : Size(200.w, 50.h),
         ),
         shape: MaterialStateProperty.all(
           RoundedRectangleBorder(

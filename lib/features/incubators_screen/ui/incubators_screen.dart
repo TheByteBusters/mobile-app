@@ -38,7 +38,7 @@ class _IncubatorsScreenState extends ConsumerState {
               Padding(
                 padding: EdgeInsets.only(left: 8.w, bottom: 24.h),
                 child: Text(
-                  'Incubators list',
+                  'Reservation Form',
                   style: TextStyles.h1BlackBold,
                 ),
               ),
@@ -51,11 +51,9 @@ class _IncubatorsScreenState extends ConsumerState {
                       child: Padding(
                         padding: const EdgeInsets.only(left: 8),
                         child: ListView.builder(
-                          itemCount: incubators!.length,
+                          itemCount: incubators.length,
                           itemBuilder: (context, index) {
-                            return
-                                // Text('hi');
-                                IncubatorTile(
+                            return IncubatorTile(
                               incubator: incubators[index],
                             );
                           },

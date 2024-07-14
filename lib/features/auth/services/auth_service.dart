@@ -66,7 +66,7 @@ class AuthService {
       return 'you must provide a number';
     }
 
-    if (number.length != 11) {
+    if (number.length != 10) {
       return 'you must provide a valide number';
     }
     print('number: $number');
@@ -76,5 +76,24 @@ class AuthService {
 
   static bool validateBrithDate(String date) {
     return date != '';
+  }
+
+  static String? validateNumber(String? number) {
+    if (number == ' ' || number == null) {
+      return 'must provide a number';
+    }
+    try {
+      double.parse(number);
+      return null;
+    } catch (e) {
+      return 'must provide a valid phone number';
+    }
+  }
+
+  static String? validateText(String? text) {
+    if (text == null || text.trim() == '') {
+      return 'must  provide a valid input';
+    }
+    return null;
   }
 }
