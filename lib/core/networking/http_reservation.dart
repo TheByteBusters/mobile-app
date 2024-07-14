@@ -3,10 +3,11 @@ import 'package:http/http.dart';
 
 class HttpReservation {
   static const _urlAddress = 'backend-2-0-jftw.onrender.com';
-  // static const _header = {'Content-Type': 'application/json'};
 
   static Future<Response> sendReservationRequest(
-      String json, String token) async {
+    String json,
+    String token,
+  ) async {
     const path = '/reservations';
     final url = Uri.https(_urlAddress, path);
 
@@ -39,6 +40,28 @@ class HttpReservation {
       },
     );
     print(response.body);
+
+    return response;
+  }
+
+  static Future<Response> updateReservationState(
+    String json,
+    String token,
+    String id,
+  ) async {
+    final String path = 'hospital/reservations/$id';
+    final url = Uri.https(_urlAddress, path);
+
+    final response = await http.patch(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': token,
+      },
+      body: json,
+    );
+
+    print('reservation update response: ${response.body}');
 
     return response;
   }

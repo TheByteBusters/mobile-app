@@ -28,4 +28,22 @@ class ReservationRepository {
 
     return reservationsList;
   }
+
+  static Future<Response> acceptReservation(String id) async {
+    final token = AuthCache.getCacheData('token');
+    final json = jsonEncode({"status": "confirmed"});
+    final response =
+        await HttpReservation.updateReservationState(json, token, id);
+
+    return response;
+  }
+
+  static Future<Response> rejectReservation(String id) async {
+    final token = AuthCache.getCacheData('token');
+    final json = jsonEncode({"status": "cancelled"});
+    final response =
+        await HttpReservation.updateReservationState(json, token, id);
+
+    return response;
+  }
 }

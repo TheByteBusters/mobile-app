@@ -10,6 +10,7 @@ class ReservationModel {
     required this.birthDoctorName,
     required this.birthDoctorPhone,
     required this.hospitalId,
+    this.createdAt,
   });
 
   final num id;
@@ -22,8 +23,12 @@ class ReservationModel {
   final String birthDoctorName;
   final String birthDoctorPhone;
   final num hospitalId;
+  final String? createdAt;
 
   factory ReservationModel.fromJson(json) {
+    String date = json['created_at'];
+    date = '${date.split('T').first} ${date.split('T').last.substring(0, 5)}';
+
     return ReservationModel(
       id: json["id"],
       status: json["status"],
@@ -35,6 +40,7 @@ class ReservationModel {
       birthDoctorName: json["birth_doctor_name"],
       birthDoctorPhone: json["birth_doctor_phone"],
       hospitalId: json["hospital_id"],
+      createdAt: date,
     );
   }
 

@@ -38,7 +38,7 @@ class _IncubatorsScreenState extends ConsumerState {
               Padding(
                 padding: EdgeInsets.only(left: 8.w, bottom: 24.h),
                 child: Text(
-                  'Reservation Form',
+                  'Incubators',
                   style: TextStyles.h1BlackBold,
                 ),
               ),

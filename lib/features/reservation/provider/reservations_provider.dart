@@ -25,6 +25,7 @@ class ReservationsNotifier extends StateNotifier<List<ReservationModel>> {
             birthDoctorName: 'the doctor',
             birthDoctorPhone: '01060719095',
             hospitalId: 7,
+            createdAt: '2024-7-15 20:5:30',
           )
         ]) {
     loadReservations();
@@ -35,16 +36,18 @@ class ReservationsNotifier extends StateNotifier<List<ReservationModel>> {
   final listState = ReservationsListState.init;
 
   void listenToReservations() {
-    channel.stream.listen((message) {
-      print(message);
+    channel.stream.listen(
+      (message) {
+        print(message);
 
-      final json = jsonDecode(message);
-      if (json['type'] == 'newReservation') {
-        print("===========================\ntrying to accesss reservation");
-        print('reservation: ${json['reservation']}');
-        state = [...state, ReservationModel.fromJson(json['reservation'])];
-      }
-    });
+        final json = jsonDecode(message);
+        if (json['type'] == 'newReservation') {
+          print("===========================\ntrying to accesss reservation");
+          print('reservation: ${json['reservation']}');
+          state = [...state, ReservationModel.fromJson(json['reservation'])];
+        }
+      },
+    );
   }
 
   void loadReservations() async {

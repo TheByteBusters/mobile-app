@@ -46,7 +46,7 @@ class ReservationTile extends ConsumerWidget {
         ),
         child: ListTile(
           title: Text('Name: ${reservation.babyName}'),
-          subtitle: const Text('2024-7-12 8:30'),
+          subtitle: Text(reservation.createdAt!),
           trailing: const Icon(Icons.info_outline),
         ),
       ),

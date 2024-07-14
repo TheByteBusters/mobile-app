@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile_app/core/helpers/spacing.dart';
 import 'package:mobile_app/core/theming/styles.dart';
+import 'package:mobile_app/features/reservation/provider/reservation_details_provider.dart';
 import 'package:mobile_app/features/reservation/provider/reservations_provider.dart';
 import 'package:mobile_app/features/reservation/ui/reservations_screen/reservation_tile.dart';
 
@@ -19,7 +20,7 @@ class _ReservationScreenState extends ConsumerState<ReservationScreen> {
   @override
   Widget build(BuildContext context) {
     final reservations = ref.watch(reservationsProvider);
-    // final reservationsNotifier = ref.watch(reservationsProvider.notifier);
+    ref.watch(reservationDetailsProvider.notifier).context = context;
 
     print('buildling reservation screen');
 
@@ -40,7 +41,7 @@ class _ReservationScreenState extends ConsumerState<ReservationScreen> {
                 child: ListView.builder(
                   itemCount: reservations.length,
                   itemBuilder: ((context, index) {
-                    print("indside list$reservations");
+                    print("inside list$reservations");
                     return ReservationTile(
                       reservation: reservations[index],
                       index: index,

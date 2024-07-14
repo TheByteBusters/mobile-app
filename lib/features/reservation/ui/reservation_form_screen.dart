@@ -8,6 +8,7 @@ import 'package:mobile_app/core/widgets/app_dropdown_menu.dart';
 import 'package:mobile_app/core/widgets/app_text_form_field.dart';
 import 'package:mobile_app/core/widgets/green_button.dart';
 import 'package:mobile_app/features/auth/services/auth_service.dart';
+import 'package:mobile_app/features/home/provider/progress_provider.dart';
 import 'package:mobile_app/features/reservation/provider/parent_reservation_provider.dart';
 import 'package:mobile_app/features/search/providers/search_provider.dart';
 
@@ -26,7 +27,8 @@ class _ReservationFormScreenState extends ConsumerState {
     final _key = GlobalKey<FormState>();
     final reservationNotifier = ref.watch(parentReservationProvider.notifier);
     final searchNotifier = ref.watch(searchProvider.notifier);
-
+    final progressNotifier = ref.watch(progressProvider.notifier);
+  
     reservationNotifier.hospitalId = searchNotifier.hospital!.id;
 
     return SingleChildScrollView(
@@ -161,7 +163,7 @@ class _ReservationFormScreenState extends ConsumerState {
                       if (!formFieldsValidation) return;
 
                       _key.currentState!.save();
-                      reservationNotifier.sendReservation(context);
+                      reservationNotifier.sendReservation(context, progressNotifier);
                     },
                   ),
                 ],
