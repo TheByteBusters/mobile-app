@@ -129,8 +129,9 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                         await AuthCache.insertString('token', '');
                         if (context.mounted) {
                           context.router.pushAndPopUntil(
-                              const GetStartedRoute(),
-                              predicate: (Route<dynamic> route) => false);
+                            const GetStartedRoute(),
+                            predicate: (Route<dynamic> route) => false,
+                          );
                         }
                       },
                     ),
