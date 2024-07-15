@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:mobile_app/core/cache/auth_cache.dart';
 import 'package:mqtt_client/mqtt_client.dart';
 import 'package:mqtt_client/mqtt_server_client.dart';
 
@@ -13,8 +14,18 @@ class MqttNetwork {
     client.onConnected = _onConnected;
     client.pongCallback = _pong;
 
+    final userEmail = await AuthCache.getCacheData('email');
+    var userName = 'ziadz';
+    print(userName);
+    switch (userEmail) {
+      case 'ziadabdelaziz1995@gmail.com':
+        userName = 'tarek22';
+      case 'ammarelbadry@gmail.com':
+        userName = 'Amar22';
+    }
+
     final connMess = MqttConnectMessage()
-        .withClientIdentifier('ziadz')
+        .withClientIdentifier(userName)
         .withWillTopic('HeartRate&SPO2')
         .withWillMessage('flutter message')
         .startClean()

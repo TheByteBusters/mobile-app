@@ -24,6 +24,7 @@ class _IncubatorTileState extends State<IncubatorTile> {
       children: [
         Expanded(
           child: Container(
+            // width: double.infinity,
             margin: const EdgeInsets.only(bottom: 16),
             decoration: BoxDecoration(
               border: Border.all(

@@ -63,10 +63,34 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const ProfileScreen(),
       );
     },
+    ReservationDetailsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ReservationDetailsScreen(),
+      );
+    },
+    ReservationFormRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ReservationFormScreen(),
+      );
+    },
+    ReservationNavigationRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ReservationNavigationScreen(),
+      );
+    },
     ReservationRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const ReservationScreen(),
+      );
+    },
+    SearchNavigationRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const SearchNavigationScreen(),
       );
     },
     SearchRequestRoute.name: (routeData) {
@@ -197,6 +221,48 @@ class ProfileRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [ReservationDetailsScreen]
+class ReservationDetailsRoute extends PageRouteInfo<void> {
+  const ReservationDetailsRoute({List<PageRouteInfo>? children})
+      : super(
+          ReservationDetailsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ReservationDetailsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ReservationFormScreen]
+class ReservationFormRoute extends PageRouteInfo<void> {
+  const ReservationFormRoute({List<PageRouteInfo>? children})
+      : super(
+          ReservationFormRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ReservationFormRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ReservationNavigationScreen]
+class ReservationNavigationRoute extends PageRouteInfo<void> {
+  const ReservationNavigationRoute({List<PageRouteInfo>? children})
+      : super(
+          ReservationNavigationRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ReservationNavigationRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [ReservationScreen]
 class ReservationRoute extends PageRouteInfo<void> {
   const ReservationRoute({List<PageRouteInfo>? children})
@@ -206,6 +272,20 @@ class ReservationRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'ReservationRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [SearchNavigationScreen]
+class SearchNavigationRoute extends PageRouteInfo<void> {
+  const SearchNavigationRoute({List<PageRouteInfo>? children})
+      : super(
+          SearchNavigationRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SearchNavigationRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

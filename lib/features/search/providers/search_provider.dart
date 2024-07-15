@@ -32,8 +32,6 @@ class SearchNotifier extends StateNotifier<SearchState> {
 
     if (!context.mounted) return;
 
-    searchAttempt++;
-
     if (response.statusCode == 204) {
       // in case of no hospitals found
       state = SearchState.notFound;
@@ -42,9 +40,11 @@ class SearchNotifier extends StateNotifier<SearchState> {
       // in case any thing wrong happens
       state = SearchState.faild;
       context.router.maybePop();
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text('Something went wrong! please try again'),
-      ));
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Something went wrong! please try again'),
+        ),
+      );
       searchAttempt = 0;
       return;
     }

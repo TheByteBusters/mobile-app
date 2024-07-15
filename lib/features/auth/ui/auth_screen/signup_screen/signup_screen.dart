@@ -192,7 +192,6 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
               },
             ),
           ),
-          // verticalSpace(10.h),
         ],
       ),
     );

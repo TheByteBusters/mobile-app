@@ -4,11 +4,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile_app/core/cache/auth_cache.dart';
 import 'package:mobile_app/core/helpers/spacing.dart';
+import 'package:mobile_app/core/networking/websocket_reservation.dart';
 import 'package:mobile_app/core/routing/app_router.dart';
 import 'package:mobile_app/core/theming/colors.dart';
 import 'package:mobile_app/core/theming/styles.dart';
 import 'package:mobile_app/features/profile/ui/profile_screen/profile_divider.dart';
 import 'package:mobile_app/features/profile/ui/profile_screen/profile_tile.dart';
+import 'package:web_socket_channel/status.dart' as status;
 
 @RoutePage()
 class ProfileScreen extends ConsumerStatefulWidget {
@@ -22,11 +24,11 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final String userName = AuthCache.getCacheData('name')!;
-    final String city = AuthCache.getCacheData('city')!;
+    final String? city = AuthCache.getCacheData('city')!;
     final String email = AuthCache.getCacheData('email')!;
-    final String phoneNumber = AuthCache.getCacheData('phone_number')!;
+    final String? phoneNumber = AuthCache.getCacheData('phone_number')!;
     final screenWidth = MediaQuery.of(context).size.width;
-    final String userRole = AuthCache.getCacheData('role');
+    final String? userRole = AuthCache.getCacheData('role');
 
     return Scaffold(
       body: Container(
@@ -90,7 +92,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                     if (userRole == 'parent') const ProfileDivider(),
                     if (userRole == 'parent')
                       ProfileTile(
-                        titleText: city,
+                        titleText: city!,
                         leadingIcon: Icons.location_on_outlined,
                       ),
                     if (userRole == 'parent') const ProfileDivider(),
@@ -102,7 +104,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                     if (userRole == 'parent') const ProfileDivider(),
                     if (userRole == 'parent')
                       ProfileTile(
-                        titleText: phoneNumber,
+                        titleText: phoneNumber!,
                         leadingIcon: Icons.phone_outlined,
                       ),
                     const ProfileDivider(),
@@ -123,6 +125,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                       ),
                       tileColor: Colors.blueGrey.shade50,
                       onTap: () async {
+                        channel.sink.close(status.goingAway);
                         await AuthCache.insertString('token', '');
                         if (context.mounted) {
                           context.router.pushAndPopUntil(
