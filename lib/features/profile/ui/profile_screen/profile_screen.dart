@@ -22,11 +22,11 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final String userName = AuthCache.getCacheData('name')!;
-    final String city = AuthCache.getCacheData('city')!;
+    final String? city = AuthCache.getCacheData('city')!;
     final String email = AuthCache.getCacheData('email')!;
-    final String phoneNumber = AuthCache.getCacheData('phone_number')!;
+    final String? phoneNumber = AuthCache.getCacheData('phone_number')!;
     final screenWidth = MediaQuery.of(context).size.width;
-    final String userRole = AuthCache.getCacheData('role');
+    final String? userRole = AuthCache.getCacheData('role');
 
     return Scaffold(
       body: Container(
@@ -90,7 +90,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                     if (userRole == 'parent') const ProfileDivider(),
                     if (userRole == 'parent')
                       ProfileTile(
-                        titleText: city,
+                        titleText: city!,
                         leadingIcon: Icons.location_on_outlined,
                       ),
                     if (userRole == 'parent') const ProfileDivider(),
@@ -102,7 +102,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                     if (userRole == 'parent') const ProfileDivider(),
                     if (userRole == 'parent')
                       ProfileTile(
-                        titleText: phoneNumber,
+                        titleText: phoneNumber!,
                         leadingIcon: Icons.phone_outlined,
                       ),
                     const ProfileDivider(),
